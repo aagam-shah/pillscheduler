@@ -35,7 +35,7 @@ public class addPill extends SherlockActivity {
                 ActionBar.DISPLAY_SHOW_CUSTOM | ActionBar.DISPLAY_SHOW_HOME
                         | ActionBar.DISPLAY_SHOW_TITLE);
         
-                
+                actionBar.setTitle("Add Pill");
 		setContentView(R.layout.addedit);
 		startActionMode(mActionModeCallback);
 		others =(Button)findViewById(R.id.others);

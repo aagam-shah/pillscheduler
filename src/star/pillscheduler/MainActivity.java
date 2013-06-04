@@ -30,7 +30,6 @@ public class MainActivity extends SherlockActivity {
 		lv = (ListView)findViewById(R.id.listView);
 		listLoad();
 		
-		
 		lv.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
@@ -73,8 +72,11 @@ public class MainActivity extends SherlockActivity {
         	  };
         	 
         Cursor c =PillDB.getPillAlarms();
-		ListAdapter laa = new SimpleCursorAdapter(this, R.layout.list_row, c, columns, to);
-		lv.setAdapter(laa);
+				
+		PillListDBAdapter pldb = new PillListDBAdapter(this, R.layout.list_row, c, columns, to);
+		
+		lv.setAdapter(pldb);
+		
 		
 	}
 	
