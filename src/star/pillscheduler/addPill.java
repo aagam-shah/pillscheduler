@@ -1,10 +1,14 @@
 package star.pillscheduler;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.InputType;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -14,6 +18,7 @@ import android.view.View.OnKeyListener;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.actionbarsherlock.app.*;
@@ -22,7 +27,7 @@ import com.actionbarsherlock.view.*;
 public class addPill extends SherlockActivity {
 
 	public CheckBox cb1,cb2,cb3,cb4;
-	public Button others;
+	public Button others,timings;
 	public int numberPills=0;
 	public EditText pName,pDescr;
 	@Override
@@ -30,17 +35,16 @@ public class addPill extends SherlockActivity {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		final ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayOptions(
-                ActionBar.DISPLAY_SHOW_CUSTOM,
-                ActionBar.DISPLAY_SHOW_CUSTOM | ActionBar.DISPLAY_SHOW_HOME
-                        | ActionBar.DISPLAY_SHOW_TITLE);
         
-                actionBar.setTitle("Add Pill");
+        actionBar.setDisplayShowHomeEnabled(true);
+        
+        actionBar.setTitle("Add Pill");
 		setContentView(R.layout.addedit);
-		startActionMode(mActionModeCallback);
+	
 		others =(Button)findViewById(R.id.others);
 		pName=(EditText)findViewById(R.id.pill_name);
 		pDescr=(EditText)findViewById(R.id.pill_descr);
+		timings=(Button)findViewById(R.id.addtime);
 		setListeners();
 		final EditText pill_n = (EditText)findViewById(R.id.pill_name);
 	}
@@ -54,11 +58,25 @@ public class addPill extends SherlockActivity {
 				showDialog(2);	
 			}
 		});
+		
+		timings.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Intent i = new Intent("star.pillscheduler.setTimings");
+				startActivityForResult(i, 39);
+			}
+		});
+		
+		
+		
+		
 	}
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getSupportMenuInflater().inflate(R.menu.main, menu);
+		getSupportMenuInflater().inflate(R.menu.savemenu, menu);
 		return true;
 	}
 	
@@ -169,6 +187,19 @@ public class addPill extends SherlockActivity {
 	    }
 	};
 	
+	
+	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		// TODO Auto-generated method stub
+		if(resultCode==Activity.RESULT_OK){
+			Toast.makeText(this, "Added", Toast.LENGTH_SHORT).show();
+			
+		}
+		
+		
+		
+	}
 	private void savePill() {
 		// TODO Auto-generated method stub
 		

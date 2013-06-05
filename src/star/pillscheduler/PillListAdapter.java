@@ -4,8 +4,11 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.HorizontalScrollView;
@@ -54,21 +57,21 @@ public class PillListAdapter extends BaseAdapter {
         ImageView tv = (ImageView)vi.findViewById(R.id.pill_img);
         RelativeLayout pill_details = (RelativeLayout)vi.findViewById(R.id.pill_l);
         final View finalVi = vi;
-        pill_details.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-            	
-                HorizontalScrollView hv = (HorizontalScrollView) finalVi.findViewById(R.id.scroll);
-                hv.setHorizontalScrollBarEnabled(false);
-               if(hv.getVisibility()==View.GONE)
-                hv.setVisibility(View.VISIBLE);
-               else
-            	   hv.setVisibility(View.GONE);
-             /*  Intent i = new Intent("star.pillscheduler.addPill");
-
-                ac.startActivityForResult(i, 0);*/
-            }
-        });
+        pill_details.setOnTouchListener(new OnTouchListener() {
+			
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				// TODO Auto-generated method stub
+				 HorizontalScrollView hv = (HorizontalScrollView) finalVi.findViewById(R.id.scroll);
+	                hv.setHorizontalScrollBarEnabled(false);
+	               if(hv.getVisibility()==View.GONE)
+	                hv.setVisibility(View.VISIBLE);
+	               else
+	            	   hv.setVisibility(View.GONE);
+	               Log.e("clic", ":)");
+	               return false;
+			}
+		});
 
        /* TextView title = (TextView)vi.findViewById(R.id.title); // title
         TextView artist = (TextView)vi.findViewById(R.id.artist); // artist name

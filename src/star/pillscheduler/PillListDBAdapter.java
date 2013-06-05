@@ -5,10 +5,12 @@ import android.database.Cursor;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.SimpleCursorAdapter;
+import android.widget.Toast;
 
 public class PillListDBAdapter extends SimpleCursorAdapter{
 
@@ -45,23 +47,7 @@ public class PillListDBAdapter extends SimpleCursorAdapter{
 		return curs;
 	}
 
-	@Override
-	public void bindView(View view, Context context, Cursor cursor) {
-		// TODO Auto-generated method stub
-		ImageView iv =(ImageView)view.findViewById(R.id.pill_img);
-		iv.setImageResource(R.drawable.ic_launcher);
-		
-		RelativeLayout rL=(RelativeLayout)view.findViewById(R.id.wrapper_list);
-		
-	}
-
-	@Override
-	public View newView(Context context, Cursor cursor, ViewGroup parent) {
-		// TODO Auto-generated method stub
-		return super.newView(context, cursor, parent);
-	}
-
-
+	
 	
 	
 

@@ -24,7 +24,7 @@ public class PillDB {
 	
 	
 	private static final String CREATE_TABLE_DAYS="create table if not exists days "+
-            "(id integer,isalterDay boolean,alterDay integer default 1,allDays boolean,mon integer default 000," +
+            "(id integer,isSet integer,isalterDay boolean,alterDay integer default 1,allDays boolean,mon integer default 000," +
             "tue integer default 000,wed integer default 000,thu integer default 000,fri integer default 000," +
             "sat integer default 000,sun integer default 000);";
 	
@@ -43,7 +43,7 @@ public class PillDB {
 		}
 		catch(Exception e){
 			db=null;
-			Toast.makeText(ctx, "Error in creating DB", Toast.LENGTH_LONG).show();
+			Toast.makeText(ctx, "Error in creating DB,Please re-install", Toast.LENGTH_LONG).show();
 			return;
 		}
 		

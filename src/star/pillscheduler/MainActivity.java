@@ -3,16 +3,20 @@ package star.pillscheduler;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Button;
 import android.widget.HorizontalScrollView;
+import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.actionbarsherlock.app.*;
 import com.actionbarsherlock.view.*;
@@ -39,17 +43,30 @@ public class MainActivity extends SherlockActivity {
 				final View newVi = view;
 				TextView tv = (TextView)findViewById(R.id.list_row_title);
 				TextView tv1 = (TextView)findViewById(R.id.list_row_descr);
-				RelativeLayout rl = (RelativeLayout)view.findViewById(R.id.wrapper_list);
+				ImageView iv =(ImageView)view.findViewById(R.id.pill_img);
+				iv.setImageResource(R.drawable.orange);
 				
-						HorizontalScrollView hv = (HorizontalScrollView)newVi.findViewById(R.id.scroll);
-						if(hv.getVisibility()==View.GONE)
-			                hv.setVisibility(View.VISIBLE);
-			            else
-			            	hv.setVisibility(View.GONE);
+				Button b = (Button)findViewById(R.id.checkb);
+				b.setOnClickListener(new OnClickListener() {
+					
+					@Override
+					public void onClick(View v) {
+						// TODO Auto-generated method stub
+						Log.e("clicked", ":P");
+					}
+				});
+				HorizontalScrollView hv = (HorizontalScrollView)newVi.findViewById(R.id.scroll);
+				if(hv.getVisibility()==View.GONE)
+	                hv.setVisibility(View.VISIBLE);
+	            else{
+	            	hv.setVisibility(View.GONE);
+	            	Toast.makeText(getApplicationContext(), "Touched", Toast.LENGTH_SHORT).show();
+				
+						
 					
 				
 			}
-		});
+		}});
         }
 
 	
