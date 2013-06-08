@@ -10,18 +10,20 @@ public class PillAlarm {
 	private boolean isAlterDay;
 	private int ringtone;
 	private boolean allDays;
-	private String[] daysTime;
-	
-	public PillAlarm(String t,String d,String[] dayst){
-		this.title=t;
-		this.descr=d;
-		this.daysTime=dayst;
-		
-	}
+	private String daysTime;
 	
 	public PillAlarm(String t,String d){
 		this.title=t;
 		this.descr=d;
+		//this.daysTime=dayst;
+		
+	}
+	
+	public PillAlarm(String t,String d,int pills,String timings){
+		this.title=t;
+		this.descr=d;
+		pillsLeft=pills;
+		daysTime=timings;
 			}
 
 	public String getTitle(){
@@ -32,7 +34,12 @@ public class PillAlarm {
 		return this.descr;
 	}
 	
-	public String[] getDays(){
+	public int getPills(){
+		return this.pillsLeft;
+		
+	}
+	
+	public String getTimings(){
 		return this.daysTime;
 	}
 	

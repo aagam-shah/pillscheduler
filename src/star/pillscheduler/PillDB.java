@@ -20,18 +20,17 @@ public class PillDB {
 	private static final String CREATE_TABLE_PILLS ="create table if not exists lists " +
 			"( _id integer primary key autoincrement, "
             + "name varchar(50), descr varchar(50), justNotify boolean default true," +
-            "pillImageLocation text default '',ringtone int default 1);";
+            "pillImageLocation text default '',ringtone integer default 1);";
 	
 	
 	private static final String CREATE_TABLE_DAYS="create table if not exists days "+
-            "(id integer,isSet integer,isalterDay boolean,alterDay integer default 1,allDays boolean,mon integer default 000," +
-            "tue integer default 000,wed integer default 000,thu integer default 000,fri integer default 000," +
-            "sat integer default 000,sun integer default 000);";
+            "(idPill integer,days text,pillsL integer);";
 	
 	private static final String TOTAL_ALARMS="SELECT COUNT(*) FROM table_name;";
 	
 	private static Context context;
 	private static SQLiteDatabase db;
+	public int databseID=1;
 	
 	public PillDB(Context ctx){
 		context=ctx;
@@ -53,9 +52,12 @@ public class PillDB {
 	}
 	
 	public static long addAlarm(PillAlarm newA){
+		
 		String title= newA.getTitle();
 		String descr = newA.getDescr();
-		String[] dayTime=newA.getDays();
+		String timings=newA.getTimings();
+		int pillsL=newA.getPills();
+		
 		ContentValues values = new ContentValues();
         values.put("name", title);
         values.put("descr", descr);
@@ -63,8 +65,13 @@ public class PillDB {
         
         
         		long t=db.insert("lists", null, values);
+        		ContentValues values1 = new ContentValues();
+        		values1.put("idPill", (int)t);
+                values1.put("days", title);
+                values1.put("pillsL", descr);	
         		
-        		Log.e("msgs   ", ""+t);
+        		
+        		//Log.e("msgs   ", ""+t);
         		alarmID=(int) t;
         		Log.e("number", ""+getNumberOfAlarms());
         		return t;

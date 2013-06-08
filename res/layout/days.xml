@@ -39,7 +39,7 @@
             android:textOff="M"
             android:textOn="M"
             android:layout_marginRight="-8dip"
-            android:id="@+id/toggleButton"
+            android:id="@+id/tb1"
              android:checked="false"/>
     <ToggleButton
             android:layout_width="45dp"
@@ -49,7 +49,7 @@
             android:layout_weight="1"
             android:textOn="N"
             android:layout_marginRight="-8dip"
-            android:id="@+id/toggleButton"
+            android:id="@+id/tb2"
             android:checked="false" android:layout_marginBottom="3dp"/>
     <ToggleButton
             android:layout_width="45dp"
@@ -58,7 +58,7 @@
             android:layout_weight="1"
             android:textOff="E"
             android:textOn="E"
-            android:id="@+id/toggleButton"
+            android:id="@+id/tb3"
             android:checked="false" android:layout_marginBottom="3dp"/>
     </LinearLayout>
         </LinearLayout>
@@ -88,7 +88,7 @@
                     android:textOff="M"
                     android:textOn="M"
                     android:layout_marginRight="-8dip"
-                    android:id="@+id/toggleButton"
+                    android:id="@+id/tb4"
                     android:checked="false"/>
             <ToggleButton
                     android:layout_width="45dp"
@@ -98,7 +98,7 @@
                     android:layout_weight="1"
                     android:textOn="N"
                     android:layout_marginRight="-8dip"
-                    android:id="@+id/toggleButton"
+                    android:id="@+id/tb5"
                     android:checked="false" android:layout_marginBottom="3dp"/>
             <ToggleButton
                     android:layout_width="45dp"
@@ -107,7 +107,7 @@
                     android:layout_weight="1"
                     android:textOff="E"
                     android:textOn="E"
-                    android:id="@+id/toggleButton"
+                    android:id="@+id/tb6"
                     android:checked="false" android:layout_marginBottom="3dp"/>
         </LinearLayout>
     </LinearLayout>
@@ -137,7 +137,7 @@
                     android:textOff="M"
                     android:textOn="M"
                     android:layout_marginRight="-8dip"
-                    android:id="@+id/toggleButton"
+                    android:id="@+id/tb7"
                     android:checked="false"/>
             <ToggleButton
                     android:layout_width="45dp"
@@ -147,7 +147,7 @@
                     android:layout_weight="1"
                     android:textOn="N"
                     android:layout_marginRight="-8dip"
-                    android:id="@+id/toggleButton"
+                    android:id="@+id/tb8"
                     android:checked="false" android:layout_marginBottom="3dp"/>
             <ToggleButton
                     android:layout_width="45dp"
@@ -156,7 +156,7 @@
                     android:layout_weight="1"
                     android:textOff="E"
                     android:textOn="E"
-                    android:id="@+id/toggleButton"
+                    android:id="@+id/tb9"
                     android:checked="false" android:layout_marginBottom="3dp"/>
         </LinearLayout>
     </LinearLayout>
@@ -193,7 +193,7 @@
                         android:textOff="M"
                         android:textOn="M"
                         android:layout_marginRight="-8dip"
-                        android:id="@+id/toggleButton"
+                        android:id="@+id/tb10"
                         android:checked="false"/>
                 <ToggleButton
                         android:layout_width="45dp"
@@ -203,7 +203,7 @@
                         android:layout_weight="1"
                         android:textOn="N"
                         android:layout_marginRight="-8dip"
-                        android:id="@+id/toggleButton"
+                        android:id="@+id/tb11"
                         android:checked="false" android:layout_marginBottom="3dp"/>
                 <ToggleButton
                         android:layout_width="45dp"
@@ -212,7 +212,7 @@
                         android:layout_weight="1"
                         android:textOff="E"
                         android:textOn="E"
-                        android:id="@+id/toggleButton"
+                        android:id="@+id/tb12"
                         android:checked="false" android:layout_marginBottom="3dp"/>
             </LinearLayout>
         </LinearLayout>
@@ -242,7 +242,7 @@
                         android:textOff="M"
                         android:textOn="M"
                         android:layout_marginRight="-8dip"
-                        android:id="@+id/toggleButton"
+                        android:id="@+id/tb13"
                         android:checked="false"/>
                 <ToggleButton
                         android:layout_width="45dp"
@@ -252,7 +252,7 @@
                         android:layout_weight="1"
                         android:textOn="N"
                         android:layout_marginRight="-8dip"
-                        android:id="@+id/toggleButton"
+                        android:id="@+id/tb14"
                         android:checked="false" android:layout_marginBottom="3dp"/>
                 <ToggleButton
                         android:layout_width="45dp"
@@ -261,7 +261,7 @@
                         android:layout_weight="1"
                         android:textOff="E"
                         android:textOn="E"
-                        android:id="@+id/toggleButton"
+                        android:id="@+id/tb15"
                         android:checked="false" android:layout_marginBottom="3dp"/>
             </LinearLayout>
         </LinearLayout>
@@ -291,7 +291,7 @@
                         android:textOff="M"
                         android:textOn="M"
                         android:layout_marginRight="-8dip"
-                        android:id="@+id/toggleButton"
+                        android:id="@+id/tb16"
                         android:checked="false"/>
                 <ToggleButton
                         android:layout_width="45dp"
@@ -301,7 +301,7 @@
                         android:layout_weight="1"
                         android:textOn="N"
                         android:layout_marginRight="-8dip"
-                        android:id="@+id/toggleButton"
+                        android:id="@+id/tb17"
                         android:checked="false" android:layout_marginBottom="3dp"/>
                 <ToggleButton
                         android:layout_width="45dp"
@@ -310,7 +310,7 @@
                         android:layout_weight="1"
                         android:textOff="E"
                         android:textOn="E"
-                        android:id="@+id/toggleButton"
+                        android:id="@+id/tb18"
                         android:checked="false" android:layout_marginBottom="3dp"/>
             </LinearLayout>
         </LinearLayout>
@@ -347,7 +347,7 @@
                         android:textOff="M"
                         android:textOn="M"
                         android:layout_marginRight="-8dip"
-                        android:id="@+id/toggleButton"
+                        android:id="@+id/tb19"
                         android:checked="false"/>
                 <ToggleButton
                         android:layout_width="45dp"
@@ -357,7 +357,7 @@
                         android:layout_weight="1"
                         android:textOn="N"
                         android:layout_marginRight="-8dip"
-                        android:id="@+id/toggleButton"
+                        android:id="@+id/tb20"
                         android:checked="false" android:layout_marginBottom="3dp"/>
                 <ToggleButton
                         android:layout_width="45dp"
@@ -366,7 +366,7 @@
                         android:layout_weight="1"
                         android:textOff="E"
                         android:textOn="E"
-                        android:id="@+id/toggleButton"
+                        android:id="@+id/tb21"
                         android:checked="false" android:layout_marginBottom="3dp"/>
             </LinearLayout>
         </LinearLayout>
@@ -396,7 +396,7 @@
                         android:textOff="M"
                         android:textOn="M"
                         android:layout_marginRight="-12dp"
-                        android:id="@+id/toggleButton"
+                        android:id="@+id/tb22"
                         android:checked="false"/>
                 <ToggleButton
                         android:layout_width="45dp"
@@ -406,7 +406,7 @@
                         android:layout_weight="1"
                         android:textOn="N"
                         android:layout_marginRight="-12dp"
-                        android:id="@+id/toggleButton"
+                        android:id="@+id/tb23"
                         android:checked="false" android:layout_marginBottom="3dp"/>
                 <ToggleButton
                         android:layout_width="45dp"
@@ -415,7 +415,7 @@
                         android:layout_weight="1"
                         android:textOff="E"
                         android:textOn="E"
-                        android:id="@+id/toggleButton"
+                        android:id="@+id/tb24"
                         android:checked="false" android:layout_marginBottom="3dp"/>
             </LinearLayout>
         </LinearLayout>
@@ -445,7 +445,7 @@
                         android:textOff="M"
                         android:textOn="M"
                         android:layout_marginRight="-8dip"
-                        android:id="@+id/toggleButton"
+                        android:id="@+id/tb25"
                         android:checked="false"/>
                 <ToggleButton
                         android:layout_width="45dp"
@@ -455,7 +455,7 @@
                         android:layout_weight="1"
                         android:textOn="N"
                         android:layout_marginRight="-8dip"
-                        android:id="@+id/toggleButton"
+                        android:id="@+id/tb26"
                         android:checked="false" android:layout_marginBottom="3dp"/>
                 <ToggleButton
                         android:layout_width="45dp"
@@ -464,7 +464,7 @@
                         android:layout_weight="1"
                         android:textOff="E"
                         android:textOn="E"
-                        android:id="@+id/toggleButton"
+                        android:id="@+id/tb27"
                         android:checked="false" android:layout_marginBottom="3dp"/>
             </LinearLayout>
         </LinearLayout>
