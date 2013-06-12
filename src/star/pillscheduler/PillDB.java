@@ -1,6 +1,8 @@
 package star.pillscheduler;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -81,24 +83,12 @@ public class PillDB {
         		//Log.e("msgs   ", ""+t);
         		alarmID=(int) t;
         		Log.e("number", ""+getNumberOfAlarms());
-        		queryDB();
+        		List<Integer> tppp= queryDB(1);
         		//watchDB();
         		return t;
 		
 	}
 	
-	
-	private static void watchDB() {
-		// TODO Auto-generated method stub
-		Cursor c = db.rawQuery("select idPill, days from days", null);
-		while(c.moveToNext()){
-			Log.e("ids stored", ""+c.getString(c.getColumnIndex("idPill")));
-			Log.e("string stored", ""+c.getString(c.getColumnIndex("days")));
-			
-		}
-		
-		
-	}
 
 
 	public static long getNumberOfAlarms(){
@@ -130,10 +120,13 @@ public class PillDB {
 	
 
 	public static void ring(int i){
-		
+		//queryDB();
 		if(i==1){
 			//its morning
 			int today = Calendar.DAY_OF_WEEK;
+			// Intent itt = new Intent("star.pillscheduler.addPill");
+
+             //context.startActivity(itt);
 			//obtain string of all the alarms and then check if there is any alarm for today morning
 			Log.e("morning", "recvd");
 		}
@@ -152,21 +145,33 @@ public class PillDB {
 		}
 	}
 	
-	public static int queryDB(){
+	//public static Cursor curs;
+	
+	public static List<Integer> queryDB(int i){
+		List<Integer> idsA= new ArrayList<Integer>();
+		
 		Cursor curs = db.rawQuery("select idPill, days from days ", null);
-		//curs.moveToFirst();
+		String curr="";
 		while(curs.moveToNext()){
 			int id=curs.getInt(0);
 			String s = curs.getString(1);
 			Calendar c = Calendar.getInstance();
 			int day =c.get(Calendar.DAY_OF_WEEK);
 			
+			day=(day-2)*3;
+			
 			String ss=s.substring(day, day+3);
-			String curr=getStatus(ss);
-		
+			curr=getStatus(ss);
+			if(curr.charAt(i-1)!='0')
+			{
+			idsA.add(id);
+			}
 			Log.e("id"+id, " when "+curr);
 		}
-		return 0;
+		
+		
+		
+			return idsA;
 	}
 
 

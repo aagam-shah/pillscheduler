@@ -36,6 +36,7 @@ public class MainActivity extends SherlockActivity {
 		setContentView(R.layout.list);
 		getSupportActionBar().setDisplayShowHomeEnabled(false);
 		PillDB pdb= new PillDB(this);
+		//PillDB.queryDB();
 		if(firstinsall){
 			firstinsall=false;
 		startAlarm();}
@@ -98,6 +99,9 @@ public class MainActivity extends SherlockActivity {
 		customM.set(Calendar.SECOND, 0);
 		customM.set(Calendar.MILLISECOND, 0);
 		
+		if(customM.before(c))
+			customM.add(Calendar.DAY_OF_MONTH, 1);
+		
 		Intent i =new Intent(this,PillAlarmReceiver.class);
 		
 		i.putExtra("time",3);
@@ -117,7 +121,9 @@ public class MainActivity extends SherlockActivity {
 		customM.set(Calendar.MINUTE, 0);
 		customM.set(Calendar.SECOND, 0);
 		customM.set(Calendar.MILLISECOND, 0);
-		
+
+		if(customM.before(c))
+			customM.add(Calendar.DAY_OF_MONTH, 1);
 		Intent i =new Intent(this,PillAlarmReceiver.class);
 		
 		i.putExtra("time",2);
@@ -130,14 +136,16 @@ public class MainActivity extends SherlockActivity {
 
 
 	private void setMorning() {
-		// TODO Auto-generated method stub
 		Calendar c = Calendar.getInstance();
 		Calendar customM =(Calendar) c.clone();
-		customM.set(Calendar.HOUR_OF_DAY, c.get(Calendar.HOUR_OF_DAY));
-		customM.set(Calendar.MINUTE, c.get(Calendar.MINUTE));
-		customM.set(Calendar.SECOND, c.get(Calendar.SECOND));
-		customM.set(Calendar.MILLISECOND, c.get(Calendar.MILLISECOND));
-		customM.setTimeInMillis(c.getTimeInMillis());
+		customM.set(Calendar.HOUR_OF_DAY, 8);
+		customM.set(Calendar.MINUTE, 0);
+		customM.set(Calendar.SECOND, 0);
+		customM.set(Calendar.MILLISECOND, 0);
+		
+		if(customM.before(c))
+			customM.add(Calendar.DAY_OF_MONTH, 1);
+		
 		Intent i =new Intent(this,PillAlarmReceiver.class);
 		
 		i.putExtra("time",1);
@@ -199,7 +207,5 @@ public class MainActivity extends SherlockActivity {
 		
 		return super.onOptionsItemSelected(item);
 	}
-
-	
 
 }
