@@ -1,5 +1,9 @@
 package star.pillscheduler;
 
+import java.util.Calendar;
+
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -23,16 +27,21 @@ import com.actionbarsherlock.view.*;
 
 public class MainActivity extends SherlockActivity {
 
-	
+	public int oneDay=24*60*60*1000; //86,400,000 milliseconds
 	public ListView lv ;
+	public static boolean firstinsall=true;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.list);
 		getSupportActionBar().setDisplayShowHomeEnabled(false);
 		PillDB pdb= new PillDB(this);
+		if(firstinsall){
+			firstinsall=false;
+		startAlarm();}
 		lv = (ListView)findViewById(R.id.listView);
 		listLoad();
+		
 		
 		lv.setOnItemClickListener(new OnItemClickListener() {
 
@@ -70,6 +79,76 @@ public class MainActivity extends SherlockActivity {
         }
 
 	
+	private void startAlarm() {
+		// TODO Auto-generated method stub
+		
+		setMorning();
+		setNoon();
+		setEve();
+		
+	}
+
+
+	private void setEve() {
+		// TODO Auto-generated method stub
+		Calendar c = Calendar.getInstance();
+		Calendar customM =(Calendar) c.clone();
+		customM.set(Calendar.HOUR_OF_DAY, 21);
+		customM.set(Calendar.MINUTE, 0);
+		customM.set(Calendar.SECOND, 0);
+		customM.set(Calendar.MILLISECOND, 0);
+		
+		Intent i =new Intent(this,PillAlarmReceiver.class);
+		
+		i.putExtra("time",3);
+		
+		PendingIntent pt= PendingIntent.getBroadcast(this,3, i, PendingIntent.FLAG_UPDATE_CURRENT);
+		AlarmManager am = (AlarmManager) getSystemService(this.ALARM_SERVICE);
+		am.setRepeating(AlarmManager.RTC_WAKEUP, customM.getTimeInMillis(),oneDay, pt);
+		Log.e("setted","eve");
+	}
+
+
+	private void setNoon() {
+		// TODO Auto-generated method stub
+		Calendar c = Calendar.getInstance();
+		Calendar customM =(Calendar) c.clone();
+		customM.set(Calendar.HOUR_OF_DAY, 13);
+		customM.set(Calendar.MINUTE, 0);
+		customM.set(Calendar.SECOND, 0);
+		customM.set(Calendar.MILLISECOND, 0);
+		
+		Intent i =new Intent(this,PillAlarmReceiver.class);
+		
+		i.putExtra("time",2);
+		
+		PendingIntent pt= PendingIntent.getBroadcast(this, 2, i, PendingIntent.FLAG_UPDATE_CURRENT);
+		AlarmManager am = (AlarmManager) getSystemService(this.ALARM_SERVICE);
+		am.setRepeating(AlarmManager.RTC_WAKEUP, customM.getTimeInMillis(),oneDay, pt);
+		Log.e("setted","noon");
+	}
+
+
+	private void setMorning() {
+		// TODO Auto-generated method stub
+		Calendar c = Calendar.getInstance();
+		Calendar customM =(Calendar) c.clone();
+		customM.set(Calendar.HOUR_OF_DAY, c.get(Calendar.HOUR_OF_DAY));
+		customM.set(Calendar.MINUTE, c.get(Calendar.MINUTE));
+		customM.set(Calendar.SECOND, c.get(Calendar.SECOND));
+		customM.set(Calendar.MILLISECOND, c.get(Calendar.MILLISECOND));
+		customM.setTimeInMillis(c.getTimeInMillis());
+		Intent i =new Intent(this,PillAlarmReceiver.class);
+		
+		i.putExtra("time",1);
+		
+		PendingIntent pt= PendingIntent.getBroadcast(this,1, i, PendingIntent.FLAG_UPDATE_CURRENT);
+		AlarmManager am = (AlarmManager) getSystemService(this.ALARM_SERVICE);
+		am.setRepeating(AlarmManager.RTC_WAKEUP, 1,oneDay, pt);
+		Log.e("setted","morn");
+	}
+
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -103,8 +182,8 @@ public class MainActivity extends SherlockActivity {
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
-		
 		listLoad();
+		
 	}
 
 

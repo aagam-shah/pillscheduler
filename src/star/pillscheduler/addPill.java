@@ -1,8 +1,12 @@
 package star.pillscheduler;
 
+import java.util.Calendar;
+
 import android.app.Activity;
+import android.app.AlarmManager;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.PendingIntent;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -26,10 +30,14 @@ import com.actionbarsherlock.view.*;
 
 public class addPill extends SherlockActivity {
 
+	
+
+
 	public CheckBox cb1,cb2,cb3,cb4;
 	public Button others,timings;
 	public int numberPills=0;
 	public EditText pName,pDescr;
+	public String dayslist="";
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -80,7 +88,24 @@ public class addPill extends SherlockActivity {
 		return true;
 	}
 	
-	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// TODO Auto-generated method stub
+		switch(item.getItemId()){
+    	case R.id.saveButton:
+    		Log.e("hello", "save");
+    		savePill();
+    		finish();
+    		return true;
+    	case R.id.discard:
+    		finish();
+    		return false;
+    	default:
+    		Log.e("hello", "save");
+    		Toast.makeText(getApplicationContext(), "eror",Toast.LENGTH_SHORT).show();
+    		return true;
+    	}
+	}
 	
 	@Override
 	@Deprecated
@@ -171,11 +196,13 @@ public class addPill extends SherlockActivity {
 	    	case R.id.discard:
 	    		finish();
 	    		return false;
-	    	
+	    	default:
+	    		Log.e("hello", "save");
+	    		savePill();
+	    		showDialog(2);
+	    		return true;
 	    	}
-	    	
-	    //	Log.e("hello tick", ""+item.getItemId());
-	        return false;
+	    
 	    }
 
 	    
@@ -194,7 +221,7 @@ public class addPill extends SherlockActivity {
 		// TODO Auto-generated method stub
 		if(resultCode==Activity.RESULT_OK){
 			Toast.makeText(this, "Added", Toast.LENGTH_SHORT).show();
-			
+			dayslist = data.getStringExtra("lists");
 		}
 		
 		
@@ -205,9 +232,22 @@ public class addPill extends SherlockActivity {
 		
 		String name = pName.getText().toString();
 		String descrt=pDescr.getText().toString();
-		PillAlarm p = new PillAlarm(name,descrt);
-		PillDB.addAlarm(p);
+		PillAlarm p = new PillAlarm(name,descrt,dayslist);
 		
+		
+		long id = PillDB.addAlarm(p);
+		
+		
+		Calendar c = Calendar.getInstance();
+		
+		
+		Intent i =new Intent(this,PillAlarmReceiver.class);
+		
+		i.putExtra("id",id);
+		
+		PendingIntent pt= PendingIntent.getBroadcast(this, (int) id, i, PendingIntent.FLAG_UPDATE_CURRENT);
+		AlarmManager am = (AlarmManager) getSystemService(this.ALARM_SERVICE);
+	   //s am.set(AlarmManager.RTC_WAKEUP, Calendar.getTimeInMillis(), pt);
 	}
 	
 	

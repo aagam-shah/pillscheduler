@@ -19,10 +19,10 @@ public class PillAlarm {
 		
 	}
 	
-	public PillAlarm(String t,String d,int pills,String timings){
+	public PillAlarm(String t,String d,String timings){
 		this.title=t;
 		this.descr=d;
-		pillsLeft=pills;
+	//	pillsLeft=pills;
 		daysTime=timings;
 			}
 

@@ -1,7 +1,12 @@
 package star.pillscheduler;
 
+import java.util.Calendar;
+
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
@@ -24,7 +29,7 @@ public class PillDB {
 	
 	
 	private static final String CREATE_TABLE_DAYS="create table if not exists days "+
-            "(idPill integer,days text,pillsL integer);";
+            "(idPill integer,days varchar(30),pillsL integer,currday integer);";
 	
 	private static final String TOTAL_ALARMS="SELECT COUNT(*) FROM table_name;";
 	
@@ -51,6 +56,7 @@ public class PillDB {
 		
 	}
 	
+	
 	public static long addAlarm(PillAlarm newA){
 		
 		String title= newA.getTitle();
@@ -67,18 +73,34 @@ public class PillDB {
         		long t=db.insert("lists", null, values);
         		ContentValues values1 = new ContentValues();
         		values1.put("idPill", (int)t);
-                values1.put("days", title);
-                values1.put("pillsL", descr);	
-        		
-        		
+              //  values1.put("days", title);
+                values1.put("pillsL", descr);
+                values1.put("days", timings);
+        		Log.e("string passed db", ""+timings);
+        		db.insert("days", null, values1);
         		//Log.e("msgs   ", ""+t);
         		alarmID=(int) t;
         		Log.e("number", ""+getNumberOfAlarms());
+        		queryDB();
+        		//watchDB();
         		return t;
 		
 	}
 	
 	
+	private static void watchDB() {
+		// TODO Auto-generated method stub
+		Cursor c = db.rawQuery("select idPill, days from days", null);
+		while(c.moveToNext()){
+			Log.e("ids stored", ""+c.getString(c.getColumnIndex("idPill")));
+			Log.e("string stored", ""+c.getString(c.getColumnIndex("days")));
+			
+		}
+		
+		
+	}
+
+
 	public static long getNumberOfAlarms(){
 		
 		long size = DatabaseUtils.queryNumEntries(db, "lists");
@@ -106,6 +128,68 @@ public class PillDB {
 		
 	}
 	
-	
 
+	public static void ring(int i){
+		
+		if(i==1){
+			//its morning
+			int today = Calendar.DAY_OF_WEEK;
+			//obtain string of all the alarms and then check if there is any alarm for today morning
+			Log.e("morning", "recvd");
+		}
+		else if(i==2){
+			//its noon
+			Log.e("noon", "recvd");
+		}
+		else if(i==3){
+			//its night
+			Log.e("night", "recvd");
+		}
+		else{
+			//some error
+			Log.e("error "+i, "recvd");
+			return;
+		}
+	}
+	
+	public static int queryDB(){
+		Cursor curs = db.rawQuery("select idPill, days from days ", null);
+		//curs.moveToFirst();
+		while(curs.moveToNext()){
+			int id=curs.getInt(0);
+			String s = curs.getString(1);
+			Calendar c = Calendar.getInstance();
+			int day =c.get(Calendar.DAY_OF_WEEK);
+			
+			String ss=s.substring(day, day+3);
+			String curr=getStatus(ss);
+		
+			Log.e("id"+id, " when "+curr);
+		}
+		return 0;
+	}
+
+
+	private static String getStatus(String ss) {
+		// TODO Auto-generated method stub
+		String tp="";
+		StringBuilder sb = new StringBuilder(tp);
+		if(ss.charAt(0)=='1')
+			sb.append("M");
+		else
+			sb.append("0");
+		if(ss.charAt(1)=='1')
+			sb.append("N");
+		else
+			sb.append("0");
+		if(ss.charAt(2)=='1')
+			sb.append("E");
+		else
+			sb.append("0");
+		
+		
+		
+		return sb.toString();
+	}
+	
 }
