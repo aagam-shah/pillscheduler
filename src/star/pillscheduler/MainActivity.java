@@ -27,6 +27,9 @@ import com.actionbarsherlock.view.*;
 
 public class MainActivity extends SherlockActivity {
 
+	
+
+
 	public int oneDay=24*60*60*1000; //86,400,000 milliseconds
 	public ListView lv ;
 	public static boolean firstinsall=true;
@@ -208,4 +211,12 @@ public class MainActivity extends SherlockActivity {
 		return super.onOptionsItemSelected(item);
 	}
 
+	@Override
+	protected void onDestroy() {
+		// TODO Auto-generated method stub
+		super.onDestroy();
+		finish();
+	}
+	
+	
 }

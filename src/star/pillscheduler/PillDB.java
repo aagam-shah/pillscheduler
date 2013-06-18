@@ -27,11 +27,11 @@ public class PillDB {
 	private static final String CREATE_TABLE_PILLS ="create table if not exists lists " +
 			"( _id integer primary key autoincrement, "
             + "name varchar(50), descr varchar(50), justNotify boolean default true," +
-            "pillImageLocation text default '',ringtone integer default 1);";
+            "pilloc varchar(60),isimg boolean,pillsleft integer default 0,ringtone integer default 1);";
 	
 	
 	private static final String CREATE_TABLE_DAYS="create table if not exists days "+
-            "(idPill integer,days varchar(30),pillsL integer,currday integer);";
+            "(idPill integer,days varchar(30));";
 	
 	private static final String TOTAL_ALARMS="SELECT COUNT(*) FROM table_name;";
 	
@@ -69,14 +69,45 @@ public class PillDB {
 		ContentValues values = new ContentValues();
         values.put("name", title);
         values.put("descr", descr);
+        values.put("pillsleft", pillsL);
+        values.put("isimg", false);
        // values.put("pillsLeft", 10);
         
         
         		long t=db.insert("lists", null, values);
         		ContentValues values1 = new ContentValues();
         		values1.put("idPill", (int)t);
-              //  values1.put("days", title);
-                values1.put("pillsL", descr);
+                values1.put("days", timings);
+        		Log.e("string passed db", ""+timings);
+        		db.insert("days", null, values1);
+        		//Log.e("msgs   ", ""+t);
+        		alarmID=(int) t;
+        		Log.e("number", ""+getNumberOfAlarms());
+        		List<Integer> tppp= queryDB(1);
+        		//watchDB();
+        		return t;
+		
+	}
+	
+public static long addAlarm(PillAlarm newA,String uri){
+		
+		String title= newA.getTitle();
+		String descr = newA.getDescr();
+		String timings=newA.getTimings();
+		int pillsL=newA.getPills();
+		
+		ContentValues values = new ContentValues();
+        values.put("name", title);
+        values.put("descr", descr);
+        values.put("pillsleft", pillsL);
+        values.put("isimg", true);
+        values.put("pilloc", uri);
+       // values.put("pillsLeft", 10);
+        
+        
+        		long t=db.insert("lists", null, values);
+        		ContentValues values1 = new ContentValues();
+        		values1.put("idPill", (int)t);
                 values1.put("days", timings);
         		Log.e("string passed db", ""+timings);
         		db.insert("days", null, values1);
@@ -117,35 +148,7 @@ public class PillDB {
 		}
 		
 	}
-	
 
-	public static void ring(int i){
-		//queryDB();
-		if(i==1){
-			//its morning
-			int today = Calendar.DAY_OF_WEEK;
-			// Intent itt = new Intent("star.pillscheduler.addPill");
-
-             //context.startActivity(itt);
-			//obtain string of all the alarms and then check if there is any alarm for today morning
-			Log.e("morning", "recvd");
-		}
-		else if(i==2){
-			//its noon
-			Log.e("noon", "recvd");
-		}
-		else if(i==3){
-			//its night
-			Log.e("night", "recvd");
-		}
-		else{
-			//some error
-			Log.e("error "+i, "recvd");
-			return;
-		}
-	}
-	
-	//public static Cursor curs;
 	
 	public static List<Integer> queryDB(int i){
 		List<Integer> idsA= new ArrayList<Integer>();
@@ -168,10 +171,7 @@ public class PillDB {
 			}
 			Log.e("id"+id, " when "+curr);
 		}
-		
-		
-		
-			return idsA;
+		return idsA;
 	}
 
 

@@ -19,13 +19,26 @@ public class PillAlarm {
 		
 	}
 	
-	public PillAlarm(String t,String d,String timings){
+	public PillAlarm(String t,String d,String timings,int totalPills){
 		this.title=t;
 		this.descr=d;
-	//	pillsLeft=pills;
+		pillsLeft=totalPills;
 		daysTime=timings;
 			}
 
+	public PillAlarm(String t, String d, String timings, String imguri,int totalPills) {
+		// TODO Auto-generated constructor stub
+		this.title=t;
+		this.descr=d;
+		pillsLeft=totalPills;
+		daysTime=timings;
+		imLoc = imguri;
+	}
+
+	
+	public String getImgUri(){
+		return this.imLoc;
+	}
 	public String getTitle(){
 		
 		return this.title;

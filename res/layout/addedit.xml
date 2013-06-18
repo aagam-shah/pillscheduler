@@ -14,10 +14,11 @@
         android:weightSum="2" >
 
         <ImageView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@drawable/imageborder"
+            android:id="@+id/pillImg"
+            
             android:src="@drawable/orange" />
 
         <EditText
@@ -77,6 +78,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:id="@+id/cb1"
                 android:text="5" />
 
             <CheckBox
@@ -84,6 +86,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="-10dp"
                 android:layout_weight="1"
+                android:id="@+id/cb2"
                 android:text="10" />
 
             <CheckBox
@@ -91,6 +94,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="-10dp"
                 android:layout_weight="1"
+                android:id="@+id/cb3"
                 android:text="20" />
 
             <CheckBox
@@ -98,6 +102,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="-10dp"
                 android:layout_weight="1"
+                android:id="@+id/cb4"
                 android:text="30" />
 
             <Button

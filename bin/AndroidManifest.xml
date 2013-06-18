@@ -7,14 +7,22 @@
     <uses-sdk
         android:minSdkVersion="10"
         android:targetSdkVersion="15" />
+    
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+<uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
+<uses-permission android:name="android.permission.CAMERA"/>
+<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> 
 
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
+        android:hardwareAccelerated="true"
+        
         android:label="@string/app_name"
         android:theme="@style/Theme.Sherlock.Light" >
         <activity
             android:name="star.pillscheduler.MainActivity"
+            
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,7 +32,9 @@
         </activity>
         
         
-       <activity   android:name=".addPill" android:label="@string/app_name">  
+       <activity   
+           android:screenOrientation="portrait"
+           android:name=".addPill" android:label="@string/app_name">  
      <intent-filter> 
        <action android:name="star.pillscheduler.addPill" />  
          <category android:name="android.intent.category.DEFAULT" />  
@@ -34,6 +44,15 @@
        <activity   android:name=".setTimings" android:label="@string/app_name">  
      <intent-filter> 
        <action android:name="star.pillscheduler.setTimings" />  
+         <category android:name="android.intent.category.DEFAULT" />  
+     </intent-filter>   
+  </activity>
+  
+       <activity   android:name=".AlarmDialog"
+           android:theme="@android:style/Theme.Dialog"
+            android:label="@string/app_name">  
+     <intent-filter> 
+       <action android:name="star.pillscheduler.AlarmDialog" />  
          <category android:name="android.intent.category.DEFAULT" />  
      </intent-filter>   
   </activity>

@@ -1,5 +1,7 @@
 package star.pillscheduler;
 
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.Calendar;
 
 import android.app.Activity;
@@ -9,7 +11,12 @@ import android.app.Dialog;
 import android.app.PendingIntent;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
@@ -33,11 +40,16 @@ public class addPill extends SherlockActivity {
 	
 
 
-	public CheckBox cb1,cb2,cb3,cb4;
+	public CheckBox[] cb1=new CheckBox[4];
+	public int[] cbids={R.id.cb1,R.id.cb2,R.id.cb3,R.id.cb4};
 	public Button others,timings;
+	public ImageView pillImg;
 	public int numberPills=0;
-	public EditText pName,pDescr;
+	public EditText pName,pDescr,pNo;
 	public String dayslist="";
+	public boolean isIMG=false;
+	public int dialogvalue=0;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -48,16 +60,22 @@ public class addPill extends SherlockActivity {
         
         actionBar.setTitle("Add Pill");
 		setContentView(R.layout.addedit);
-	
+		pillImg=(ImageView)findViewById(R.id.pillImg);
 		others =(Button)findViewById(R.id.others);
 		pName=(EditText)findViewById(R.id.pill_name);
 		pDescr=(EditText)findViewById(R.id.pill_descr);
 		timings=(Button)findViewById(R.id.addtime);
+		for(int i=0;i<4;i++){
+			cb1[i]=(CheckBox)findViewById(cbids[i]);
+			
+		}
 		setListeners();
-		final EditText pill_n = (EditText)findViewById(R.id.pill_name);
+		//asda
+		pNo = (EditText)findViewById(R.id.pill_name);
 	}
 	private void setListeners() {
-		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub\
+		
 		others.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -67,12 +85,25 @@ public class addPill extends SherlockActivity {
 			}
 		});
 		
+		pillImg.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+			    startActivityForResult(intent, 100);	
+			}
+		});
+		
+		
+		
 		timings.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				Intent i = new Intent("star.pillscheduler.setTimings");
+				i.putExtra(MediaStore.EXTRA_SCREEN_ORIENTATION, ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 				startActivityForResult(i, 39);
 			}
 		});
@@ -93,6 +124,7 @@ public class addPill extends SherlockActivity {
 		// TODO Auto-generated method stub
 		switch(item.getItemId()){
     	case R.id.saveButton:
+    		boolean isEmpty = checkNotEmpty();
     		Log.e("hello", "save");
     		savePill();
     		finish();
@@ -107,6 +139,12 @@ public class addPill extends SherlockActivity {
     	}
 	}
 	
+	private boolean checkNotEmpty() {
+		// TODO Auto-generated method stub
+		
+		
+		return false;
+	}
 	@Override
 	@Deprecated
 	protected Dialog onCreateDialog(int id) {
@@ -141,6 +179,7 @@ public class addPill extends SherlockActivity {
 	                String value = input.getText().toString();
 	                Toast.makeText(getApplicationContext(), value+" selected", Toast.LENGTH_SHORT).show();
 	                numberPills=Integer.parseInt(value);
+	                dialogvalue=numberPills;
 	                Log.d("asd", "User name: " + value);
 	                return;
 	            }
@@ -150,6 +189,7 @@ public class addPill extends SherlockActivity {
 	 
 	            @Override
 	            public void onClick(DialogInterface dialog, int which) {
+	            	dialogvalue=0;
 	            	Toast.makeText(getApplicationContext(), "0 selected", Toast.LENGTH_SHORT).show();
 	                return;
 	            }
@@ -157,71 +197,46 @@ public class addPill extends SherlockActivity {
 	 
 	        return builder.create();
 	    }
-	
-
-
-
-	private ActionMode.Callback mActionModeCallback = new ActionMode.Callback() {
-
-	    // Called when the action mode is created; startActionMode() was called
-	    @Override
-	    public boolean onCreateActionMode(ActionMode mode, Menu menu) {
-	        // Inflate a menu resource providing context menu items
-	        MenuInflater inflater = mode.getMenuInflater();
-	        inflater.inflate(R.menu.savemenu, menu);
-	        return true;
-	    }
-
-	    // Called each time the action mode is shown. Always called after onCreateActionMode, but
-	    // may be called multiple times if the mode is invalidated.
-	    @Override
-	    public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
-	        return false; // Return false if nothing is done
-	    }
-	    
-	    
-
-	    // Called when the user selects a contextual menu item
-	    @Override
-	    public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
-	    	
-	    	switch(item.getItemId()){
-	    	case R.id.saveButton:
-	    		Log.e("hello", "save");
-	    		savePill();
-	    		showDialog(2);
-	    		
-	    		finish();
-	    		return true;
-	    	case R.id.discard:
-	    		finish();
-	    		return false;
-	    	default:
-	    		Log.e("hello", "save");
-	    		savePill();
-	    		showDialog(2);
-	    		return true;
-	    	}
-	    
-	    }
-
-	    
-
-		// Called when the user exits the action mode
-	    @Override
-	    public void onDestroyActionMode(ActionMode mode) {
-	       // mActionMode = null;
-	    }
-	};
-	
-	
-	
+		
+	public Uri picUri;
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		// TODO Auto-generated method stub
-		if(resultCode==Activity.RESULT_OK){
+		//Log.e("camera", "");
+		
+		if(requestCode==39 && resultCode==Activity.RESULT_OK){
 			Toast.makeText(this, "Added", Toast.LENGTH_SHORT).show();
 			dayslist = data.getStringExtra("lists");
+			
+			
+		}
+		
+		else if(requestCode==100){
+			///camera here :)
+			picUri = data.getData();
+			String s =picUri.getEncodedPath();
+			InputStream stream = null;
+			try {
+				stream = getContentResolver().openInputStream(data.getData());
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	        Bitmap bitmap = BitmapFactory.decodeStream(stream);
+
+	       
+			
+			pillImg.setImageBitmap(bitmap);
+			isIMG=true;
+			Toast.makeText(this, "Added", Toast.LENGTH_SHORT).show();
+			//Log.e("camera", ""+s);
+			
+		}
+		else{
+			//gg
+			Toast.makeText(this, "Added w/o", Toast.LENGTH_SHORT).show();
+			Log.e("camera", "gone here");
+			
 		}
 		
 		
@@ -232,23 +247,33 @@ public class addPill extends SherlockActivity {
 		
 		String name = pName.getText().toString();
 		String descrt=pDescr.getText().toString();
-		PillAlarm p = new PillAlarm(name,descrt,dayslist);
+		int totalPills=getTotalPills();
+		
+		PillAlarm p;
+		long id=0;
+		if(isIMG){
+			String imguri = picUri.getEncodedPath();
+			p = new PillAlarm(name,descrt,dayslist,imguri,totalPills);
+			id = PillDB.addAlarm(p,imguri);
+		}
+		else{
+			p = new PillAlarm(name,descrt,dayslist,totalPills);
+			id = PillDB.addAlarm(p);
+		}
 		
 		
-		long id = PillDB.addAlarm(p);
-		
-		
-		Calendar c = Calendar.getInstance();
-		
-		
-		Intent i =new Intent(this,PillAlarmReceiver.class);
-		
-		i.putExtra("id",id);
-		
-		PendingIntent pt= PendingIntent.getBroadcast(this, (int) id, i, PendingIntent.FLAG_UPDATE_CURRENT);
-		AlarmManager am = (AlarmManager) getSystemService(this.ALARM_SERVICE);
-	   //s am.set(AlarmManager.RTC_WAKEUP, Calendar.getTimeInMillis(), pt);
 	}
+	private int getTotalPills() {
+		// TODO Auto-generated method stub
+		int value=0;
+		for(int i=0;i<4;i++){
+			if(cb1[i].isChecked()){
+				value =value + Integer.parseInt(cb1[i].getText().toString());
+			}
+			
+		}
+		value=value+dialogvalue;
+		return value;
 	
-	
+	}
 }
