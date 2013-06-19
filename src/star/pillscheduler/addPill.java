@@ -46,7 +46,7 @@ public class addPill extends SherlockActivity {
 	public ImageView pillImg;
 	public int numberPills=0;
 	public EditText pName,pDescr,pNo;
-	public String dayslist="";
+	public String dayslist="000000000000000000000000000";
 	public boolean isIMG=false;
 	public int dialogvalue=0;
 	
@@ -90,6 +90,7 @@ public class addPill extends SherlockActivity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				isIMG=true;
 				Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 			    startActivityForResult(intent, 100);	
 			}
@@ -214,6 +215,7 @@ public class addPill extends SherlockActivity {
 		else if(requestCode==100){
 			///camera here :)
 			picUri = data.getData();
+			Log.e("picnewuir", ""+picUri.toString());
 			String s =picUri.getEncodedPath();
 			InputStream stream = null;
 			try {
@@ -252,7 +254,8 @@ public class addPill extends SherlockActivity {
 		PillAlarm p;
 		long id=0;
 		if(isIMG){
-			String imguri = picUri.getEncodedPath();
+			String imguri =picUri.toString();
+			Log.e("imageuri", ""+imguri);
 			p = new PillAlarm(name,descrt,dayslist,imguri,totalPills);
 			id = PillDB.addAlarm(p,imguri);
 		}

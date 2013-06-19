@@ -42,7 +42,8 @@ public class MainActivity extends SherlockActivity {
 		//PillDB.queryDB();
 		if(firstinsall){
 			firstinsall=false;
-		startAlarm();}
+		startAlarm();
+		}
 		lv = (ListView)findViewById(R.id.listView);
 		listLoad();
 		
@@ -170,12 +171,12 @@ public class MainActivity extends SherlockActivity {
 	
 	public void listLoad(){
 		String[] columns = new String[] {"_id",
-        	    PillDB.nameDB,PillDB.descrDB
+        	    PillDB.nameDB,PillDB.descrDB,"pillsleft","pilloc"
         	  };
         	 
         	  // the XML defined views which the data will be bound to
         	  int[] to = new int[] { R.id.list_row_title,
-        	    R.id.list_row_title,R.id.list_row_descr
+        	    R.id.list_row_title,R.id.list_row_descr,R.id.list_pills,R.id.pill_img
         	  };
         	 
         Cursor c =PillDB.getPillAlarms();

@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-import android.app.AlarmManager;
-import android.app.PendingIntent;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
@@ -27,7 +25,7 @@ public class PillDB {
 	private static final String CREATE_TABLE_PILLS ="create table if not exists lists " +
 			"( _id integer primary key autoincrement, "
             + "name varchar(50), descr varchar(50), justNotify boolean default true," +
-            "pilloc varchar(60),isimg boolean,pillsleft integer default 0,ringtone integer default 1);";
+            "pilloc varchar(60) default 'aagamshah',isimg boolean,pillsleft integer default 0,ringtone integer default 1);";
 	
 	
 	private static final String CREATE_TABLE_DAYS="create table if not exists days "+
@@ -39,6 +37,8 @@ public class PillDB {
 	private static SQLiteDatabase db;
 	public int databseID=1;
 	
+	
+	//create DB
 	public PillDB(Context ctx){
 		context=ctx;
 		try{
@@ -58,7 +58,7 @@ public class PillDB {
 		
 	}
 	
-	
+	//Add an alarm without changing image of pill
 	public static long addAlarm(PillAlarm newA){
 		
 		String title= newA.getTitle();
@@ -88,7 +88,7 @@ public class PillDB {
         		return t;
 		
 	}
-	
+	//Add an alarm which also has a specific pic, i.e - uri
 public static long addAlarm(PillAlarm newA,String uri){
 		
 		String title= newA.getTitle();
@@ -121,7 +121,7 @@ public static long addAlarm(PillAlarm newA,String uri){
 	}
 	
 
-
+//TO get the total number of alarms..
 	public static long getNumberOfAlarms(){
 		
 		long size = DatabaseUtils.queryNumEntries(db, "lists");
@@ -130,9 +130,11 @@ public static long addAlarm(PillAlarm newA,String uri){
 		return size;
 	}
 	
+	
+//zto obtain a cursor of all the alarms	
 	public static Cursor getPillAlarms(){
 		
-		try{Cursor mCursor = db.query("lists", new String[] {"_id","name","descr"}, 
+		try{Cursor mCursor = db.query("lists", new String[] {"_id","name","descr","pillsleft","pilloc"}, 
 			    null, null, null, null, null);
 			 
 			  if (mCursor != null) {
@@ -148,6 +150,10 @@ public static long addAlarm(PillAlarm newA,String uri){
 		}
 		
 	}
+	
+	//Here i is the current time i.e-Morning,Noon,Evening...Accordingly check if 
+	//alarm is set for each item in the list at that time and than 
+	//return the list of alarms to be ring at that time
 
 	
 	public static List<Integer> queryDB(int i){
@@ -174,7 +180,7 @@ public static long addAlarm(PillAlarm newA,String uri){
 		return idsA;
 	}
 
-
+//A 3 char string is passed and accordingly M,N,E is printed
 	private static String getStatus(String ss) {
 		// TODO Auto-generated method stub
 		String tp="";

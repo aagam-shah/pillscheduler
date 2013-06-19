@@ -73,6 +73,7 @@
                     android:text="Click me" />
 
             <Button
+                	android:id="@+id/list_pills"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Click me" />
