@@ -1,5 +1,6 @@
 package star.pillscheduler;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.Calendar;
@@ -16,6 +17,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.InputType;
@@ -49,6 +51,8 @@ public class addPill extends SherlockActivity {
 	public String dayslist="000000000000000000000000000";
 	public boolean isIMG=false;
 	public int dialogvalue=0;
+	public static String location;
+	public static int fileid=125;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -91,7 +95,12 @@ public class addPill extends SherlockActivity {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				isIMG=true;
+				location=Environment.getExternalStorageDirectory()+"/Pills/star-"+System.currentTimeMillis()+".jpg";
+				new File(Environment.getExternalStorageDirectory()+"/Pills").mkdirs();
+				Uri uriSavedImage=Uri.fromFile(new File(location));
+				
 				Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+				intent.putExtra(MediaStore.EXTRA_OUTPUT, uriSavedImage);
 			    startActivityForResult(intent, 100);	
 			}
 		});
@@ -103,8 +112,10 @@ public class addPill extends SherlockActivity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				
+				//Log.e("location", ""+location);
 				Intent i = new Intent("star.pillscheduler.setTimings");
-				i.putExtra(MediaStore.EXTRA_SCREEN_ORIENTATION, ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+		
 				startActivityForResult(i, 39);
 			}
 		});
@@ -214,9 +225,9 @@ public class addPill extends SherlockActivity {
 		
 		else if(requestCode==100){
 			///camera here :)
-			picUri = data.getData();
-			Log.e("picnewuir", ""+picUri.toString());
-			String s =picUri.getEncodedPath();
+			//picUri = data.getData();
+			Log.e("picnewuir", "pl"+location);
+			//String s =picUri.getEncodedPath();
 			InputStream stream = null;
 			try {
 				stream = getContentResolver().openInputStream(data.getData());
@@ -254,10 +265,11 @@ public class addPill extends SherlockActivity {
 		PillAlarm p;
 		long id=0;
 		if(isIMG){
-			String imguri =picUri.toString();
-			Log.e("imageuri", ""+imguri);
-			p = new PillAlarm(name,descrt,dayslist,imguri,totalPills);
-			id = PillDB.addAlarm(p,imguri);
+			
+			
+			Log.e("imageuri", ""+location);
+			p = new PillAlarm(name,descrt,dayslist,location,totalPills);
+			id = PillDB.addAlarm(p,location);
 		}
 		else{
 			p = new PillAlarm(name,descrt,dayslist,totalPills);

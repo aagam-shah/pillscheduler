@@ -58,7 +58,7 @@ public class MainActivity extends SherlockActivity {
 				TextView tv = (TextView)findViewById(R.id.list_row_title);
 				TextView tv1 = (TextView)findViewById(R.id.list_row_descr);
 				ImageView iv =(ImageView)view.findViewById(R.id.pill_img);
-				iv.setImageResource(R.drawable.orange);
+			//	iv.setImageResource(R.drawable.orange);
 				
 				Button b = (Button)findViewById(R.id.checkb);
 				b.setOnClickListener(new OnClickListener() {

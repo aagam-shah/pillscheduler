@@ -1,5 +1,6 @@
 package star.pillscheduler;
 
+import java.io.File;
 import java.net.URI;
 
 import android.content.Context;
@@ -60,13 +61,18 @@ public class PillListDBAdapter extends SimpleCursorAdapter{
 	}
 	@Override
 	public void setViewImage(ImageView v, String value) {
-		// TODO Auto-generated method stub
-		//Uri my = Uri.parse(value);
-		
-		Bitmap bmImg = BitmapFactory.decodeFile(value);
-		v.setImageBitmap(bmImg);
-		//v.setImageResource(R.drawable.orange);
-//		v.setBackgroundResource(R.drawable.orange);
+		File imgFile = new  File(value);
+		if(imgFile.exists()){
+			BitmapFactory.Options options=new BitmapFactory.Options();
+			options.inSampleSize = 8;
+			//Bitmap preview_bitmap=BitmapFactory.decodeStream(is,null,options);
+		    Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath(),options);
+		    v.setImageBitmap(myBitmap);
+
+		}
+		else{
+			Log.e("ad", "doesnt exist"+value);
+		}
 		Log.e("ad", "asdc"+value);
 		//v.setImageURI(my);
 	}
