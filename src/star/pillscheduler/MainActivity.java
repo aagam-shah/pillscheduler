@@ -1,11 +1,11 @@
 package star.pillscheduler;
 
 import java.util.Calendar;
-
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.database.Cursor;
+import android.opengl.Visibility;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -25,13 +25,13 @@ import android.widget.Toast;
 import com.actionbarsherlock.app.*;
 import com.actionbarsherlock.view.*;
 
-public class MainActivity extends SherlockActivity {
+public class MainActivity extends SherlockActivity{
 
 	
 
 
 	public int oneDay=24*60*60*1000; //86,400,000 milliseconds
-	public ListView lv ;
+	public static ListView lv ;
 	public static boolean firstinsall=true;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -39,12 +39,15 @@ public class MainActivity extends SherlockActivity {
 		setContentView(R.layout.list);
 		getSupportActionBar().setDisplayShowHomeEnabled(false);
 		PillDB pdb= new PillDB(this);
+		//TextView tv1=(TextView)findViewById(R.id.emptyView);
 		//PillDB.queryDB();
 		if(firstinsall){
 			firstinsall=false;
+			//tv1.setVisibility(View.VISIBLE);
 		startAlarm();
 		}
 		lv = (ListView)findViewById(R.id.listView);
+		//tv1.setVisibility(View.VISIBLE);
 		listLoad();
 		
 		
@@ -217,6 +220,12 @@ public class MainActivity extends SherlockActivity {
 		// TODO Auto-generated method stub
 		super.onDestroy();
 		finish();
+	}
+
+	public static void update() {
+		
+		lv.invalidateViews();
+		
 	}
 	
 	

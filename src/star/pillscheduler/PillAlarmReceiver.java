@@ -2,11 +2,11 @@ package star.pillscheduler;
 
 import java.util.Iterator;
 import java.util.List;
-
 import android.app.Service;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.sax.StartElementListener;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -19,8 +19,10 @@ public class PillAlarmReceiver extends BroadcastReceiver {
 	@Override
 	public void onReceive(Context arg0, Intent i) {
 		// TODO Auto-generated method
-		
-		int val=0;
+		 arg0.startService(new Intent(arg0, PillService.class));
+  		
+  		
+		/*int val=0;
 		int d = i.getIntExtra("time", val);
 		PillDB pd = new PillDB(arg0);
 		List<Integer> result=pd.queryDB(d);

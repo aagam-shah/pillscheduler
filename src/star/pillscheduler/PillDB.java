@@ -6,7 +6,6 @@ import java.util.List;
 
 import android.content.ContentValues;
 import android.content.Context;
-import android.content.Intent;
 import android.database.Cursor;
 import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
@@ -201,6 +200,11 @@ public static long addAlarm(PillAlarm newA,String uri){
 		
 		
 		return sb.toString();
+	}
+
+	public static void delete(int i) {
+		db.delete("lists", "_id=?",new String[] {""+i});
+		MainActivity.update();
 	}
 	
 }

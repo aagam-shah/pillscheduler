@@ -1,92 +1,90 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:tools="http://schemas.android.com/tools"
-                android:id="@+id/wrapper_list"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:padding="8dp"
-
-                tools:context=".MainActivity" >
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/wrapper_list"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:padding="8dp"
+    tools:context=".MainActivity" >
 
     <RelativeLayout
-            android:id="@+id/pill_l"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            >
+        android:id="@+id/pill_l"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
 
         <ImageView
-                android:id="@+id/pill_img"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
-                android:src="@drawable/ic_launcher" />
+            android:id="@+id/pill_img"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:background="@drawable/list_border"
+            android:src="@drawable/ic_launcher" />
 
         <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/pill_img"
-                android:orientation="vertical" android:id="@+id/linearLayout">
+            android:id="@+id/linearLayout"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/pill_img"
+            android:orientation="vertical" >
 
             <TextView
-                    android:id="@+id/list_row_title"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.20"
-                    android:paddingLeft="4dp"
-                    android:text="Hello"
-                    android:textSize="20dp" />
+                android:id="@+id/list_row_title"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.20"
+                android:paddingLeft="4dp"
+                android:text="Hello"
+                android:textSize="20dp" />
         </LinearLayout>
 
         <TextView
-                android:id="@+id/list_row_descr"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:paddingLeft="4dp"
-                android:paddingTop="10dp"
-                android:text="Description"
-                android:textSize="15dp" android:layout_below="@+id/linearLayout"
-                android:layout_toRightOf="@+id/pill_img"/>
+            android:id="@+id/list_row_descr"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/linearLayout"
+            android:layout_toRightOf="@+id/pill_img"
+            android:paddingLeft="4dp"
+            android:paddingTop="10dp"
+            android:text="Description"
+            android:textSize="15dp" />
     </RelativeLayout>
 
     <HorizontalScrollView
-            android:id="@+id/scroll"
+        android:id="@+id/scroll"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/pill_l"
+        android:scrollbars="none"
+        android:visibility="gone" >
+
+        <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/pill_l"
-            android:scrollbars="none"
-            android:visibility="gone" >
+            android:orientation="horizontal"
+            android:paddingTop="5dp" >
 
-        <LinearLayout
-                android:layout_width="fill_parent"
+            <Button
+                android:id="@+id/checkb"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/pill_l"
-                android:orientation="horizontal"
-                android:paddingTop="5dp" >
+                android:text="checkb" />
 
             <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/checkb"
-                    android:text="Click me" />
+                android:id="@+id/list_delete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Delete" />
 
             <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Click me" />
+                android:id="@+id/list_pills"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0" />
 
             <Button
-                	android:id="@+id/list_pills"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Click me" />
-
-            <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Click me" />
-
-            <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Click me" />
+                android:id="@+id/list_edit_pill"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Edit" />
         </LinearLayout>
     </HorizontalScrollView>
 
