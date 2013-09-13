@@ -30,18 +30,20 @@ import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 
-public class EditPillActivity extends SherlockActivity{
+public class EditOldPill extends SherlockActivity{
 	public CheckBox[] cb1=new CheckBox[4];
 	public int[] cbids={R.id.cb1,R.id.cb2,R.id.cb3,R.id.cb4};
 	public Button others,timings;
 	public ImageView pillImg;
-	public int numberPills=0;
+	public int numberPills;
 	public EditText pName,pDescr,pNo;
 	public String dayslist="000000000000000000000000000";
 	public boolean isIMG=false;
 	public int dialogvalue=0;
 	public static String location="";
 	public static int fileid=125;
+	public PillAlarm pillAlarm;
+	public int id;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -51,12 +53,24 @@ public class EditPillActivity extends SherlockActivity{
         
         actionBar.setDisplayShowHomeEnabled(true);
         
-        actionBar.setTitle("Add Pill");
+        actionBar.setTitle("Edit Pill");
+        
+        id =  getIntent().getIntExtra("id", 979);
+        pillAlarm =PillDB.getPill(id); 
+        
+        numberPills = pillAlarm.getPills();
+        
+        
 		setContentView(R.layout.addedit);
 		pillImg=(ImageView)findViewById(R.id.pillImg);
+		setOldImage();
+		
 		others =(Button)findViewById(R.id.others);
 		pName=(EditText)findViewById(R.id.pill_name);
+		pName.setText(pillAlarm.getTitle());
+		
 		pDescr=(EditText)findViewById(R.id.pill_descr);
+		pDescr.setText(pillAlarm.getDescr());
 		timings=(Button)findViewById(R.id.addtime);
 		for(int i=0;i<4;i++){
 			cb1[i]=(CheckBox)findViewById(cbids[i]);
@@ -65,6 +79,18 @@ public class EditPillActivity extends SherlockActivity{
 		setListeners();
 		//asda
 		pNo = (EditText)findViewById(R.id.pill_name);
+	}
+	private void setOldImage() {
+		// TODO Auto-generated method stub
+		File imgFile = new  File(pillAlarm.getImgUri());
+		if(imgFile.exists()){
+			BitmapFactory.Options options=new BitmapFactory.Options();
+			options.inSampleSize = 8;
+			//Bitmap preview_bitmap=BitmapFactory.decodeStream(is,null,options);
+		    Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath(),options);
+		    pillImg.setImageBitmap(myBitmap);
+		}
+		
 	}
 	private void setListeners() {
 		// TODO Auto-generated method stub\
@@ -245,7 +271,7 @@ public class EditPillActivity extends SherlockActivity{
 	}
 	private void savePill() {
 		// TODO Auto-generated method stub
-		
+		PillDB.delete(id);
 		String name = pName.getText().toString();
 		String descrt=pDescr.getText().toString();
 		int totalPills=getTotalPills();

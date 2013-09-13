@@ -207,4 +207,17 @@ public static long addAlarm(PillAlarm newA,String uri){
 		MainActivity.update();
 	}
 	
+	public static PillAlarm getPill(int id){
+		Cursor cursor = db.query("lists", new String[] { "name",
+	            "descr", "pilloc","pillsLeft" }, "_id" + "=?",
+	            new String[] { String.valueOf(id) }, null, null, null, null);
+		 if (cursor != null)
+		        cursor.moveToFirst();
+		 
+		 PillAlarm pA = new  PillAlarm(cursor.getString(0), cursor.getString(1),
+				 "0", cursor.getString(2), Integer.parseInt(cursor.getString(3)) );
+		 
+		 return pA;
+		
+	}
 }

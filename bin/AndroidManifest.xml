@@ -47,6 +47,12 @@
          <category android:name="android.intent.category.DEFAULT" />  
      </intent-filter>   
   </activity>
+  <activity   android:name=".EditOldPill" android:label="@string/app_name">  
+     <intent-filter> 
+       <action android:name="star.pillscheduler.EditOldPill" />  
+         <category android:name="android.intent.category.DEFAULT" />  
+     </intent-filter>   
+  </activity>
   
        <activity   android:name=".AlarmDialog"
            android:theme="@android:style/Theme.Dialog"

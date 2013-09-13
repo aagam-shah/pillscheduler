@@ -19,7 +19,7 @@ public class PillAlarmReceiver extends BroadcastReceiver {
 	@Override
 	public void onReceive(Context arg0, Intent i) {
 		// TODO Auto-generated method
-		 arg0.startService(new Intent(arg0, PillService.class));
+		// arg0.startService(new Intent(arg0, PillService.class));
   		
   		
 		/*int val=0;

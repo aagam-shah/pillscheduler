@@ -6,10 +6,14 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Path;
+import android.graphics.Rect;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,6 +39,7 @@ public class PillListDBAdapter extends SimpleCursorAdapter{
 	public String[] from;
 	public int[] to;
 	public LayoutInflater inflater;
+	public int targetWH;
 	
 	public PillListDBAdapter(Context context, int layout, Cursor c,
 			String[] from, int[] to) {
@@ -44,6 +49,8 @@ public class PillListDBAdapter extends SimpleCursorAdapter{
 		this.curs=c;
 		this.from=from;
 		this.to=to;
+		float scale = ctx.getResources().getDisplayMetrics().density;
+		targetWH = (int) (60 * scale + 0.5f);
 		inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		// TODO Auto-generated constructor stub
 	}
@@ -77,12 +84,12 @@ public class PillListDBAdapter extends SimpleCursorAdapter{
 		RelativeLayout img_text = (RelativeLayout)view.findViewById(R.id.pill_l);
 		final HorizontalScrollView hsv = (HorizontalScrollView)view.findViewById(R.id.scroll);
 		
-		
+		final int id = cursor.getInt(cursor.getColumnIndex("_id"));
 		setImage(img,cursor.getString(cursor.getColumnIndex("pilloc")));
 		descr.setText(cursor.getString(cursor.getColumnIndex(PillDB.descrDB)));
 		name.setText(cursor.getString(cursor.getColumnIndex(PillDB.nameDB)));
 		pillNo.setText(curs.getString(cursor.getColumnIndex("pillsleft")));
-		if(Integer.parseInt(pillNo.getText().toString())<30)
+		if(Integer.parseInt(pillNo.getText().toString())<10)
 			lay.setBackgroundColor(Color.rgb(197, 226, 109));
 		
 		delete.setOnClickListener(new OnClickListener() {
@@ -98,7 +105,7 @@ public class PillListDBAdapter extends SimpleCursorAdapter{
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						PillDB.delete(cursor.getInt(cursor.getColumnIndex("_id")));
-						view.setVisibility(View.GONE);
+						
 						
 					}
 				});
@@ -120,6 +127,11 @@ public class PillListDBAdapter extends SimpleCursorAdapter{
 			@Override
 			public void onClick(View v) {
 				Toast.makeText(context, "edited :)", Toast.LENGTH_SHORT).show();
+				Intent i = new Intent("star.pillscheduler.EditOldPill");
+				i.putExtra("id", id);
+				ctx.startActivity(i);
+				
+				
 			}
 		});
 		
@@ -147,7 +159,25 @@ public class PillListDBAdapter extends SimpleCursorAdapter{
 			options.inSampleSize = 8;
 			//Bitmap preview_bitmap=BitmapFactory.decodeStream(is,null,options);
 		    Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath(),options);
-		    v.setImageBitmap(myBitmap);
+		    Bitmap targetBitmap = Bitmap.createBitmap(targetWH, 
+                    targetWH,Bitmap.Config.ARGB_8888);
+
+		    Canvas canvas = new Canvas(targetBitmap);
+	    	Path path = new Path();
+	    	path.addCircle(((float) targetWH - 1) / 2,
+	    			((float) targetWH - 1) / 2,
+	    			(Math.min(((float) targetWH), 
+	    					((float) targetWH)) / 2),
+	    							Path.Direction.CCW);
+
+	    	canvas.clipPath(path);
+	    	Bitmap sourceBitmap = myBitmap;
+	    	canvas.drawBitmap(sourceBitmap, 
+                        new Rect(0, 0, sourceBitmap.getWidth(),
+                        		sourceBitmap.getHeight()), 
+                        new Rect(0, 0, targetWH,
+                        		targetWH), null);
+		    v.setImageBitmap(sourceBitmap);
 
 		}
 		else{
