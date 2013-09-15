@@ -42,15 +42,16 @@ public class EditPillActivity extends SherlockActivity{
 	public int dialogvalue=0;
 	public static String location="";
 	public static int fileid=125;
+	public PillDB pdb;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
+		
+		pdb = new PillDB(this);
 		final ActionBar actionBar = getSupportActionBar();
-        
         actionBar.setDisplayShowHomeEnabled(true);
-        
         actionBar.setTitle("Add Pill");
 		setContentView(R.layout.addedit);
 		pillImg=(ImageView)findViewById(R.id.pillImg);
@@ -104,7 +105,6 @@ public class EditPillActivity extends SherlockActivity{
 				
 				//Log.e("location", ""+location);
 				Intent i = new Intent("star.pillscheduler.setTimings");
-		
 				startActivityForResult(i, 39);
 			}
 		});
@@ -201,8 +201,6 @@ public class EditPillActivity extends SherlockActivity{
 	public Uri picUri;
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		// TODO Auto-generated method stub
-		//Log.e("camera", "");
 		
 		if(requestCode==39 && resultCode==Activity.RESULT_OK){
 			Toast.makeText(this, "Added", Toast.LENGTH_SHORT).show();
@@ -212,8 +210,6 @@ public class EditPillActivity extends SherlockActivity{
 		}
 		
 		else if(requestCode==100){
-			///camera here :)
-			//picUri = data.getData();
 			Log.e("picnewuir", "pl"+location);
 			//String s =picUri.getEncodedPath();
 			InputStream stream = null;
@@ -244,26 +240,29 @@ public class EditPillActivity extends SherlockActivity{
 		
 	}
 	private void savePill() {
-		// TODO Auto-generated method stub
-		
 		String name = pName.getText().toString();
 		String descrt=pDescr.getText().toString();
 		int totalPills=getTotalPills();
 		
 		PillAlarm p;
 		long id=0;
+		
+		try{
 		if(isIMG){
 			
 			
 			Log.e("imageuri", ""+location);
 			p = new PillAlarm(name,descrt,dayslist,location,totalPills);
-			id = PillDB.addAlarm(p,location);
+			id = pdb.addAlarm(p,location);
 		}
 		else{
 			p = new PillAlarm(name,descrt,dayslist,totalPills);
-			id = PillDB.addAlarm(p);
+			id = pdb.addAlarm(p);
 		}
-		
+		}
+		catch(Exception e){
+			Log.e("string error", e.getMessage());
+		}
 		
 	}
 	private int getTotalPills() {

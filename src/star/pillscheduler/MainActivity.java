@@ -1,29 +1,18 @@
 package star.pillscheduler;
 
 import java.util.Calendar;
+
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.database.Cursor;
-import android.opengl.Visibility;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.Button;
-import android.widget.HorizontalScrollView;
-import android.widget.ImageView;
-import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
-import android.widget.SimpleCursorAdapter;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import com.actionbarsherlock.app.*;
-import com.actionbarsherlock.view.*;
+import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuItem;
 
 public class MainActivity extends SherlockActivity{
 
@@ -31,16 +20,18 @@ public class MainActivity extends SherlockActivity{
 
 
 	public int oneDay=24*60*60*1000; //86,400,000 milliseconds
-	public static ListView lv ;
+	public ListView lv ;
 	public static boolean firstinsall=true;
+	public static Cursor c;
+	public PillDB pdb;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.list);
 		getSupportActionBar().setDisplayShowHomeEnabled(false);
-		PillDB pdb= new PillDB(this);
-		//TextView tv1=(TextView)findViewById(R.id.emptyView);
-		//PillDB.queryDB();
+		pdb= new PillDB(this);
+		
 		if(firstinsall){
 			firstinsall=false;
 			//tv1.setVisibility(View.VISIBLE);
@@ -50,40 +41,6 @@ public class MainActivity extends SherlockActivity{
 		//tv1.setVisibility(View.VISIBLE);
 		listLoad();
 		
-		
-		lv.setOnItemClickListener(new OnItemClickListener() {
-
-			@Override
-			public void onItemClick(AdapterView<?> arg0, View view, int arg2,
-					long arg3) {
-				// TODO Auto-generated method stub
-				final View newVi = view;
-				TextView tv = (TextView)findViewById(R.id.list_row_title);
-				TextView tv1 = (TextView)findViewById(R.id.list_row_descr);
-				ImageView iv =(ImageView)view.findViewById(R.id.pill_img);
-			//	iv.setImageResource(R.drawable.orange);
-				
-				Button b = (Button)findViewById(R.id.checkb);
-				b.setOnClickListener(new OnClickListener() {
-					
-					@Override
-					public void onClick(View v) {
-						// TODO Auto-generated method stub
-						Log.e("clicked", ":P");
-					}
-				});
-				HorizontalScrollView hv = (HorizontalScrollView)newVi.findViewById(R.id.scroll);
-				if(hv.getVisibility()==View.GONE)
-	                hv.setVisibility(View.VISIBLE);
-	            else{
-	            	hv.setVisibility(View.GONE);
-	            	Toast.makeText(getApplicationContext(), "Touched", Toast.LENGTH_SHORT).show();
-				
-						
-					
-				
-			}
-		}});
         }
 
 	
@@ -172,9 +129,9 @@ public class MainActivity extends SherlockActivity{
 		return true;
 	}
 	
-	public void listLoad(){
+	public  void listLoad(){
 		String[] columns = new String[] {"_id",
-        	    PillDB.nameDB,PillDB.descrDB,"pillsleft","pilloc"
+        	    pdb.nameDB,pdb.descrDB,"pillsleft","pilloc"
         	  };
         	 
         	  // the XML defined views which the data will be bound to
@@ -182,7 +139,7 @@ public class MainActivity extends SherlockActivity{
         	    R.id.list_row_title,R.id.list_row_descr,R.id.list_pills,R.id.pill_img
         	  };
         	 
-        Cursor c =PillDB.getPillAlarms();
+        c =pdb.getPillAlarms();
 				
 		PillListDBAdapter pldb = new PillListDBAdapter(this, R.layout.list_row, c, columns, to);
 		
@@ -220,12 +177,6 @@ public class MainActivity extends SherlockActivity{
 		// TODO Auto-generated method stub
 		super.onDestroy();
 		finish();
-	}
-
-	public static void update() {
-		
-		lv.invalidateViews();
-		
 	}
 	
 	

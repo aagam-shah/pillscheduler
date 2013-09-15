@@ -28,7 +28,7 @@ public class PillDB {
 	
 	
 	private static final String CREATE_TABLE_DAYS="create table if not exists days "+
-            "(idPill integer,days varchar(30));";
+            "(idPill integer,days varchar(27));";
 	
 	private static final String TOTAL_ALARMS="SELECT COUNT(*) FROM table_name;";
 	
@@ -58,7 +58,7 @@ public class PillDB {
 	}
 	
 	//Add an alarm without changing image of pill
-	public static long addAlarm(PillAlarm newA){
+	public long addAlarm(PillAlarm newA){
 		
 		String title= newA.getTitle();
 		String descr = newA.getDescr();
@@ -81,14 +81,12 @@ public class PillDB {
         		db.insert("days", null, values1);
         		//Log.e("msgs   ", ""+t);
         		alarmID=(int) t;
-        		Log.e("number", ""+getNumberOfAlarms());
-        		List<Integer> tppp= queryDB(1);
         		//watchDB();
         		return t;
 		
 	}
 	//Add an alarm which also has a specific pic, i.e - uri
-public static long addAlarm(PillAlarm newA,String uri){
+public long addAlarm(PillAlarm newA,String uri){
 		
 		String title= newA.getTitle();
 		String descr = newA.getDescr();
@@ -155,7 +153,7 @@ public static long addAlarm(PillAlarm newA,String uri){
 	//return the list of alarms to be ring at that time
 
 	
-	public static List<Integer> queryDB(int i){
+	public  List<Integer> queryDB(int i){
 		List<Integer> idsA= new ArrayList<Integer>();
 		
 		Cursor curs = db.rawQuery("select idPill, days from days ", null);
@@ -204,7 +202,7 @@ public static long addAlarm(PillAlarm newA,String uri){
 
 	public static void delete(int i) {
 		db.delete("lists", "_id=?",new String[] {""+i});
-		MainActivity.update();
+		db.delete("days", "idPill=?",new String[] {""+i});
 	}
 	
 	public static PillAlarm getPill(int id){
@@ -214,8 +212,10 @@ public static long addAlarm(PillAlarm newA,String uri){
 		 if (cursor != null)
 		        cursor.moveToFirst();
 		 
+		 int z = Integer.parseInt(cursor.getString(3));
+		 Log.e("getPill", "pills :"+z );
 		 PillAlarm pA = new  PillAlarm(cursor.getString(0), cursor.getString(1),
-				 "0", cursor.getString(2), Integer.parseInt(cursor.getString(3)) );
+				 "0", cursor.getString(2), z);
 		 
 		 return pA;
 		

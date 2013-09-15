@@ -910,10 +910,11 @@ containing a value of this type.
         public static final int abs__textfield_searchview_right_holo_dark=0x7f02006d;
         public static final int abs__textfield_searchview_right_holo_light=0x7f02006e;
         public static final int abs__toast_frame=0x7f02006f;
-        public static final int ic_launcher=0x7f020070;
-        public static final int imageborder=0x7f020071;
-        public static final int list_border=0x7f020072;
-        public static final int orange=0x7f020073;
+        public static final int circle=0x7f020070;
+        public static final int ic_launcher=0x7f020071;
+        public static final int imageborder=0x7f020072;
+        public static final int list_border=0x7f020073;
+        public static final int orange=0x7f020074;
     }
     public static final class id {
         public static final int Alterday=0x7f04005f;
@@ -957,29 +958,34 @@ containing a value of this type.
         public static final int abs__textButton=0x7f040013;
         public static final int abs__title=0x7f04001b;
         public static final int abs__up=0x7f04000b;
-        public static final int action_settings=0x7f040071;
-        public static final int addPill=0x7f040072;
+        public static final int action_settings=0x7f040076;
+        public static final int addPill=0x7f040077;
         public static final int addtime=0x7f04003a;
         public static final int allDays=0x7f040057;
         public static final int cb1=0x7f040035;
         public static final int cb2=0x7f040036;
         public static final int cb3=0x7f040037;
         public static final int cb4=0x7f040038;
-        public static final int checkb=0x7f04006c;
+        public static final int checkb=0x7f040071;
         public static final int disableHome=0x7f040009;
-        public static final int discard=0x7f040073;
+        public static final int discard=0x7f040078;
+        public static final int eaddtime=0x7f040068;
         public static final int edit_query=0x7f040026;
+        public static final int epillImg=0x7f040064;
+        public static final int epill_descr=0x7f040066;
+        public static final int epill_name=0x7f040065;
+        public static final int epill_num=0x7f040067;
         public static final int firstRow=0x7f04003c;
         public static final int friDay=0x7f04004e;
         public static final int homeAsUp=0x7f040006;
-        public static final int linearLayout=0x7f040068;
+        public static final int linearLayout=0x7f04006d;
         public static final int listMode=0x7f040002;
-        public static final int listView=0x7f040064;
-        public static final int list_delete=0x7f04006d;
-        public static final int list_edit_pill=0x7f04006f;
-        public static final int list_pills=0x7f04006e;
-        public static final int list_row_descr=0x7f04006a;
-        public static final int list_row_title=0x7f040069;
+        public static final int listView=0x7f040069;
+        public static final int list_delete=0x7f040072;
+        public static final int list_edit_pill=0x7f040074;
+        public static final int list_pills=0x7f040073;
+        public static final int list_row_descr=0x7f04006f;
+        public static final int list_row_title=0x7f04006e;
         public static final int mainDays=0x7f04003b;
         public static final int monDay=0x7f04003d;
         public static final int normal=0x7f040001;
@@ -987,12 +993,12 @@ containing a value of this type.
         public static final int pillDialog=0x7f040063;
         public static final int pillImg=0x7f040032;
         public static final int pill_descr=0x7f040034;
-        public static final int pill_img=0x7f040067;
-        public static final int pill_l=0x7f040066;
+        public static final int pill_img=0x7f04006c;
+        public static final int pill_l=0x7f04006b;
         public static final int pill_name=0x7f040033;
         public static final int satDay=0x7f040052;
-        public static final int saveButton=0x7f040074;
-        public static final int scroll=0x7f04006b;
+        public static final int saveButton=0x7f040079;
+        public static final int scroll=0x7f040070;
         public static final int secRow=0x7f040049;
         public static final int showCustom=0x7f040008;
         public static final int showHome=0x7f040005;
@@ -1026,13 +1032,13 @@ containing a value of this type.
         public static final int tb7=0x7f040046;
         public static final int tb8=0x7f040047;
         public static final int tb9=0x7f040048;
-        public static final int textView1=0x7f040070;
+        public static final int textView1=0x7f040075;
         public static final int thirdRow=0x7f040056;
         public static final int tuesDay=0x7f040041;
         public static final int useLogo=0x7f040004;
         public static final int wedDay=0x7f040045;
         public static final int wrap_content=0x7f040000;
-        public static final int wrapper_list=0x7f040065;
+        public static final int wrapper_list=0x7f04006a;
     }
     public static final class integer {
         public static final int abs__max_action_buttons=0x7f080000;
@@ -1062,11 +1068,12 @@ containing a value of this type.
         public static final int addedit=0x7f030015;
         public static final int days=0x7f030016;
         public static final int dialog=0x7f030017;
-        public static final int list=0x7f030018;
-        public static final int list_row=0x7f030019;
-        public static final int ringdialog=0x7f03001a;
-        public static final int sherlock_spinner_dropdown_item=0x7f03001b;
-        public static final int sherlock_spinner_item=0x7f03001c;
+        public static final int editpill=0x7f030018;
+        public static final int list=0x7f030019;
+        public static final int list_row=0x7f03001a;
+        public static final int ringdialog=0x7f03001b;
+        public static final int sherlock_spinner_dropdown_item=0x7f03001c;
+        public static final int sherlock_spinner_item=0x7f03001d;
     }
     public static final class menu {
         public static final int cab=0x7f0b0000;

@@ -12,17 +12,11 @@ public class PillAlarm {
 	private boolean allDays;
 	private String daysTime;
 	
-	public PillAlarm(String t,String d){
-		this.title=t;
-		this.descr=d;
-		//this.daysTime=dayst;
-		
-	}
 	
 	public PillAlarm(String t,String d,String timings,int totalPills){
 		this.title=t;
 		this.descr=d;
-		pillsLeft=totalPills;
+		this.pillsLeft=totalPills;
 		daysTime=timings;
 			}
 
@@ -30,9 +24,9 @@ public class PillAlarm {
 		// TODO Auto-generated constructor stub
 		this.title=t;
 		this.descr=d;
-		pillsLeft=totalPills;
+		this.pillsLeft=totalPills;
 		daysTime=timings;
-		imLoc = imguri;
+		this.imLoc = imguri;
 	}
 
 	

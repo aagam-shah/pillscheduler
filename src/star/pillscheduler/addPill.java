@@ -57,7 +57,7 @@ public class addPill extends SherlockActivity {
 		super.onCreate(savedInstanceState);
 		final ActionBar actionBar = getSupportActionBar();
         
-        actionBar.setDisplayShowHomeEnabled(true);
+		actionBar.setDisplayHomeAsUpEnabled(true);
         
         actionBar.setTitle("Add Pill");
 		setContentView(R.layout.addedit);
@@ -132,6 +132,13 @@ public class addPill extends SherlockActivity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// TODO Auto-generated method stub
 		switch(item.getItemId()){
+		
+		case android.R.id.home:
+			Intent intent = new Intent(this, MainActivity.class);
+	        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+	        startActivity(intent);
+	        return true;
+	        
     	case R.id.saveButton:
     		boolean isEmpty = checkNotEmpty();
     		Log.e("hello", "save");
@@ -258,19 +265,25 @@ public class addPill extends SherlockActivity {
 		String name = pName.getText().toString();
 		String descrt=pDescr.getText().toString();
 		int totalPills=getTotalPills();
-		
+		PillDB pdb = new PillDB(this);
 		PillAlarm p;
 		long id=0;
+		
+		try{
 		if(isIMG){
 			
 			
 			Log.e("imageuri", ""+location);
 			p = new PillAlarm(name,descrt,dayslist,location,totalPills);
-			id = PillDB.addAlarm(p,location);
+			id = pdb.addAlarm(p,location);
 		}
 		else{
 			p = new PillAlarm(name,descrt,dayslist,totalPills);
-			id = PillDB.addAlarm(p);
+			id = pdb.addAlarm(p);
+		}}
+		
+		catch(Exception e){
+			Log.e("error",e.getMessage());
 		}
 		
 		

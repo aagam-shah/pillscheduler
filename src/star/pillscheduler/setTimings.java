@@ -87,7 +87,7 @@ public class setTimings extends SherlockActivity{
 		}
 		data=bf.toString();
 		Toast.makeText(getApplicationContext(), ""+data, Toast.LENGTH_LONG).show();
-		Log.e("save buff",""+data);
+		Log.e("string saved with length",""+data.length());
 		
 		
 	}

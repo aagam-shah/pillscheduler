@@ -5,9 +5,6 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.Dialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -15,12 +12,10 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.text.InputType;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -31,9 +26,8 @@ import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 
 public class EditOldPill extends SherlockActivity{
-	public CheckBox[] cb1=new CheckBox[4];
-	public int[] cbids={R.id.cb1,R.id.cb2,R.id.cb3,R.id.cb4};
-	public Button others,timings;
+	
+	public Button timings;
 	public ImageView pillImg;
 	public int numberPills;
 	public EditText pName,pDescr,pNo;
@@ -51,34 +45,30 @@ public class EditOldPill extends SherlockActivity{
 		super.onCreate(savedInstanceState);
 		final ActionBar actionBar = getSupportActionBar();
         
-        actionBar.setDisplayShowHomeEnabled(true);
+		actionBar.setDisplayHomeAsUpEnabled(true);
         
         actionBar.setTitle("Edit Pill");
+        
         
         id =  getIntent().getIntExtra("id", 979);
         pillAlarm =PillDB.getPill(id); 
         
-        numberPills = pillAlarm.getPills();
-        
-        
-		setContentView(R.layout.addedit);
-		pillImg=(ImageView)findViewById(R.id.pillImg);
+        setContentView(R.layout.editpill);
+		pillImg=(ImageView)findViewById(R.id.epillImg);
 		setOldImage();
-		
-		others =(Button)findViewById(R.id.others);
-		pName=(EditText)findViewById(R.id.pill_name);
+		pName=(EditText)findViewById(R.id.epill_name);
 		pName.setText(pillAlarm.getTitle());
 		
-		pDescr=(EditText)findViewById(R.id.pill_descr);
+		pDescr=(EditText)findViewById(R.id.epill_descr);
 		pDescr.setText(pillAlarm.getDescr());
-		timings=(Button)findViewById(R.id.addtime);
-		for(int i=0;i<4;i++){
-			cb1[i]=(CheckBox)findViewById(cbids[i]);
-			
-		}
+		timings=(Button)findViewById(R.id.eaddtime);
+		
 		setListeners();
-		//asda
-		pNo = (EditText)findViewById(R.id.pill_name);
+		
+		pNo = (EditText)findViewById(R.id.epill_num);
+		int p = pillAlarm.getPills();
+		pNo.setText(""+p);
+		
 	}
 	private void setOldImage() {
 		// TODO Auto-generated method stub
@@ -95,14 +85,6 @@ public class EditOldPill extends SherlockActivity{
 	private void setListeners() {
 		// TODO Auto-generated method stub\
 		
-		others.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				showDialog(2);	
-			}
-		});
 		
 		pillImg.setOnClickListener(new OnClickListener() {
 			
@@ -150,8 +132,15 @@ public class EditOldPill extends SherlockActivity{
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// TODO Auto-generated method stub
 		switch(item.getItemId()){
+		
+		case android.R.id.home:
+			Intent intent = new Intent(this, MainActivity.class);
+	        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+	        startActivity(intent);
+	        return true;
+			
     	case R.id.saveButton:
-    		boolean isEmpty = checkNotEmpty();
+    		
     		Log.e("hello", "save");
     		savePill();
     		finish();
@@ -166,63 +155,6 @@ public class EditOldPill extends SherlockActivity{
     	}
 	}
 	
-	private boolean checkNotEmpty() {
-		// TODO Auto-generated method stub
-		
-		
-		return false;
-	}
-	@Override
-	@Deprecated
-	protected Dialog onCreateDialog(int id) {
-		// TODO Auto-generated method stub
-		
-		switch(id){
-		case 2:
-			return createPillDialog();
-		default:
-			return null;
-		
-		}
-	}
-
-
-
-	private Dialog createPillDialog() {
-		 AlertDialog.Builder builder = new AlertDialog.Builder(this);
-	        builder.setTitle("Pill Select no of pills");
-	       // builder.setMessage("Please enter the number of pills you have");
-	 
-	         // Use an EditText view to get user input.
-	         final EditText input = new EditText(this);
-	       //  input.setId(TEXT_ID);
-	         input.setInputType(InputType.TYPE_CLASS_NUMBER);
-	         builder.setView(input);
-	         builder.setCancelable(false);
-	        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-	 
-	            @Override
-	            public void onClick(DialogInterface dialog, int whichButton) {
-	                String value = input.getText().toString();
-	                Toast.makeText(getApplicationContext(), value+" selected", Toast.LENGTH_SHORT).show();
-	                numberPills=Integer.parseInt(value);
-	                dialogvalue=numberPills;
-	                return;
-	            }
-	        });
-	 
-	        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-	 
-	            @Override
-	            public void onClick(DialogInterface dialog, int which) {
-	            	dialogvalue=0;
-	            	Toast.makeText(getApplicationContext(), "0 selected", Toast.LENGTH_SHORT).show();
-	                return;
-	            }
-	        });
-	 
-	        return builder.create();
-	    }
 		
 	public Uri picUri;
 	@Override
@@ -275,7 +207,7 @@ public class EditOldPill extends SherlockActivity{
 		String name = pName.getText().toString();
 		String descrt=pDescr.getText().toString();
 		int totalPills=getTotalPills();
-		
+		PillDB pdb = new PillDB(this);
 		PillAlarm p;
 		long id=0;
 		if(isIMG){
@@ -283,25 +215,20 @@ public class EditOldPill extends SherlockActivity{
 			
 			Log.e("imageuri", ""+location);
 			p = new PillAlarm(name,descrt,dayslist,location,totalPills);
-			id = PillDB.addAlarm(p,location);
+			id = pdb.addAlarm(p,location);
+			finish();
 		}
 		else{
 			p = new PillAlarm(name,descrt,dayslist,totalPills);
-			id = PillDB.addAlarm(p);
+			id = pdb.addAlarm(p);
+			finish();
 		}
 		
 		
 	}
 	private int getTotalPills() {
 		// TODO Auto-generated method stub
-		int value=0;
-		for(int i=0;i<4;i++){
-			if(cb1[i].isChecked()){
-				value =value + Integer.parseInt(cb1[i].getText().toString());
-			}
-			
-		}
-		value=value+dialogvalue;
+		int value=Integer.parseInt(pNo.getText().toString());
 		return value;
 	
 	}

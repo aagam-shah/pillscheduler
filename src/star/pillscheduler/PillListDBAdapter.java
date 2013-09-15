@@ -80,7 +80,7 @@ public class PillListDBAdapter extends SimpleCursorAdapter{
 		Button edit = (Button)view.findViewById(R.id.list_edit_pill);
 		Button pillNo = (Button)view.findViewById(R.id.list_pills);
 		Button delete = (Button)view.findViewById(R.id.list_delete);
-		RelativeLayout lay = (RelativeLayout)view.findViewById(R.id.wrapper_list);
+		final RelativeLayout lay = (RelativeLayout)view.findViewById(R.id.wrapper_list);
 		RelativeLayout img_text = (RelativeLayout)view.findViewById(R.id.pill_l);
 		final HorizontalScrollView hsv = (HorizontalScrollView)view.findViewById(R.id.scroll);
 		
@@ -104,8 +104,9 @@ public class PillListDBAdapter extends SimpleCursorAdapter{
 					
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
-						PillDB.delete(cursor.getInt(cursor.getColumnIndex("_id")));
-						
+						PillDB.delete(id);
+						Cursor c = getCursor();
+						c.requery();
 						
 					}
 				});
@@ -130,7 +131,7 @@ public class PillListDBAdapter extends SimpleCursorAdapter{
 				Intent i = new Intent("star.pillscheduler.EditOldPill");
 				i.putExtra("id", id);
 				ctx.startActivity(i);
-				
+				getCursor().requery();
 				
 			}
 		});
