@@ -1,471 +1,539 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:id="@+id/mainDays"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:background="@android:color/white"
-              android:weightSum="3" >
-<LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+    android:id="@+id/mainDays"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical"
+    android:weightSum="3" >
+
+    <LinearLayout
         android:id="@+id/firstRow"
+        android:layout_width="fill_parent"
+        android:paddingTop="-5dp"
+        android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:weightSum="3">
-    <LinearLayout
+        android:weightSum="3" >
+
+        <LinearLayout
+            android:id="@+id/monDay"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/monDay"
             android:layout_weight="1"
             android:orientation="vertical"
-            android:weightSum="4">
-        <ImageView
+            android:weightSum="4" >
+
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="3.2"
+                android:src="@drawable/orange" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="0.8"
+                android:weightSum="3" >
+
+                <ToggleButton
+                    android:id="@+id/tb1"
+                    android:layout_width="45dp"
+                    android:layout_height="30dip"
+                    android:layout_marginRight="-8dip"
+                    android:layout_weight="1"
+                    android:checked="false"
+                    android:text="M"
+                    android:textOff="M"
+                    android:textOn="M" />
+
+                <ToggleButton
+                    android:id="@+id/tb2"
+                    android:layout_width="45dp"
+                    android:layout_height="30dp"
+                    android:layout_marginBottom="3dp"
+                    android:layout_marginRight="-8dip"
+                    android:layout_weight="1"
+                    android:checked="false"
+                    android:text="M"
+                    android:textOff="N"
+                    android:textOn="N" />
+
+                <ToggleButton
+                    android:id="@+id/tb3"
+                    android:layout_width="45dp"
+                    android:layout_height="30dp"
+                    android:layout_marginBottom="3dp"
+                    android:layout_weight="1"
+                    android:checked="false"
+                    android:text="E"
+                    android:textOff="E"
+                    android:textOn="E" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/tuesDay"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:weightSum="4" >
+
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="3.2"
+                android:src="@drawable/orange" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="0.8"
+                android:weightSum="3" >
+
+                <ToggleButton
+                    android:id="@+id/tb4"
+                    android:layout_width="45dp"
+                    android:layout_height="30dip"
+                    android:layout_marginRight="-8dip"
+                    android:layout_weight="1"
+                    android:checked="false"
+                    android:text="M"
+                    android:textOff="M"
+                    android:textOn="M" />
+
+                <ToggleButton
+                    android:id="@+id/tb5"
+                    android:layout_width="45dp"
+                    android:layout_height="30dp"
+                    android:layout_marginBottom="3dp"
+                    android:layout_marginRight="-8dip"
+                    android:layout_weight="1"
+                    android:checked="false"
+                    android:text="M"
+                    android:textOff="N"
+                    android:textOn="N" />
+
+                <ToggleButton
+                    android:id="@+id/tb6"
+                    android:layout_width="45dp"
+                    android:layout_height="30dp"
+                    android:layout_marginBottom="3dp"
+                    android:layout_weight="1"
+                    android:checked="false"
+                    android:text="E"
+                    android:textOff="E"
+                    android:textOn="E" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/wedDay"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:weightSum="4" >
+
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="3.2"
+                android:src="@drawable/orange" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="0.8"
+                android:weightSum="3" >
+
+                <ToggleButton
+                    android:id="@+id/tb7"
+                    android:layout_width="45dp"
+                    android:layout_height="30dip"
+                    android:layout_marginRight="-8dip"
+                    android:layout_weight="1"
+                    android:checked="false"
+                    android:text="M"
+                    android:textOff="M"
+                    android:textOn="M" />
+
+                <ToggleButton
+                    android:id="@+id/tb8"
+                    android:layout_width="45dp"
+                    android:layout_height="30dp"
+                    android:layout_marginBottom="3dp"
+                    android:layout_marginRight="-8dip"
+                    android:layout_weight="1"
+                    android:checked="false"
+                    android:text="M"
+                    android:textOff="N"
+                    android:textOn="N" />
+
+                <ToggleButton
+                    android:id="@+id/tb9"
+                    android:layout_width="45dp"
+                    android:layout_height="30dp"
+                    android:layout_marginBottom="3dp"
+                    android:layout_weight="1"
+                    android:checked="false"
+                    android:text="E"
+                    android:textOff="E"
+                    android:textOn="E" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/secRow"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="3.3"
-        android:src="@drawable/orange"/>
-    <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="fill_parent"
-            android:layout_weight="0.7"
+        android:layout_weight="1"
+        android:weightSum="3" >
 
-            android:weightSum="3" >
-    <ToggleButton
-            android:layout_width="45dp"
-            android:layout_height="30dip"
-            android:text="M"
-            android:layout_weight="1"
-            android:textOff="M"
-            android:textOn="M"
-            android:layout_marginRight="-8dip"
-            android:id="@+id/tb1"
-             android:checked="false"/>
-    <ToggleButton
-            android:layout_width="45dp"
-            android:layout_height="30dp"
-            android:text="M"
-            android:textOff="N"
-            android:layout_weight="1"
-            android:textOn="N"
-            android:layout_marginRight="-8dip"
-            android:id="@+id/tb2"
-            android:checked="false" android:layout_marginBottom="3dp"/>
-    <ToggleButton
-            android:layout_width="45dp"
-            android:layout_height="30dp"
-            android:text="E"
-            android:layout_weight="1"
-            android:textOff="E"
-            android:textOn="E"
-            android:id="@+id/tb3"
-            android:checked="false" android:layout_marginBottom="3dp"/>
-    </LinearLayout>
-        </LinearLayout>
-    <LinearLayout
+        <LinearLayout
+            android:id="@+id/Thursday"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/tuesDay"
             android:layout_weight="1"
             android:orientation="vertical"
-            android:weightSum="4">
-        <ImageView
+            android:weightSum="4" >
+
+            <ImageView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="3.3"
-                android:src="@drawable/orange"/>
-        <LinearLayout
+                android:layout_weight="3.2"
+                android:src="@drawable/orange" />
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="fill_parent"
-                android:layout_weight="0.7"
-
+                android:layout_weight="0.8"
                 android:weightSum="3" >
-            <ToggleButton
+
+                <ToggleButton
+                    android:id="@+id/tb10"
                     android:layout_width="45dp"
                     android:layout_height="30dip"
-                    android:text="M"
-                    android:layout_weight="1"
-                    android:textOff="M"
-                    android:textOn="M"
                     android:layout_marginRight="-8dip"
-                    android:id="@+id/tb4"
-                    android:checked="false"/>
-            <ToggleButton
+                    android:layout_weight="1"
+                    android:checked="false"
+                    android:text="M"
+                    android:textOff="M"
+                    android:textOn="M" />
+
+                <ToggleButton
+                    android:id="@+id/tb11"
                     android:layout_width="45dp"
                     android:layout_height="30dp"
+                    android:layout_marginBottom="3dp"
+                    android:layout_marginRight="-8dip"
+                    android:layout_weight="1"
+                    android:checked="false"
                     android:text="M"
                     android:textOff="N"
-                    android:layout_weight="1"
-                    android:textOn="N"
-                    android:layout_marginRight="-8dip"
-                    android:id="@+id/tb5"
-                    android:checked="false" android:layout_marginBottom="3dp"/>
-            <ToggleButton
+                    android:textOn="N" />
+
+                <ToggleButton
+                    android:id="@+id/tb12"
                     android:layout_width="45dp"
                     android:layout_height="30dp"
-                    android:text="E"
+                    android:layout_marginBottom="3dp"
                     android:layout_weight="1"
+                    android:checked="false"
+                    android:text="E"
                     android:textOff="E"
-                    android:textOn="E"
-                    android:id="@+id/tb6"
-                    android:checked="false" android:layout_marginBottom="3dp"/>
+                    android:textOn="E" />
+            </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
-    <LinearLayout
+
+        <LinearLayout
+            android:id="@+id/friDay"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/wedDay"
             android:layout_weight="1"
             android:orientation="vertical"
-            android:weightSum="4">
-        <ImageView
+            android:weightSum="4" >
+
+            <ImageView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="3.3"
-                android:src="@drawable/orange"/>
-        <LinearLayout
+                android:layout_weight="3.2"
+                android:src="@drawable/orange" />
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="fill_parent"
-                android:layout_weight="0.7"
-
+                android:layout_weight="0.8"
                 android:weightSum="3" >
-            <ToggleButton
+
+                <ToggleButton
+                    android:id="@+id/tb13"
                     android:layout_width="45dp"
                     android:layout_height="30dip"
-                    android:text="M"
-                    android:layout_weight="1"
-                    android:textOff="M"
-                    android:textOn="M"
                     android:layout_marginRight="-8dip"
-                    android:id="@+id/tb7"
-                    android:checked="false"/>
-            <ToggleButton
+                    android:layout_weight="1"
+                    android:checked="false"
+                    android:text="M"
+                    android:textOff="M"
+                    android:textOn="M" />
+
+                <ToggleButton
+                    android:id="@+id/tb14"
                     android:layout_width="45dp"
                     android:layout_height="30dp"
+                    android:layout_marginBottom="3dp"
+                    android:layout_marginRight="-8dip"
+                    android:layout_weight="1"
+                    android:checked="false"
                     android:text="M"
                     android:textOff="N"
-                    android:layout_weight="1"
-                    android:textOn="N"
-                    android:layout_marginRight="-8dip"
-                    android:id="@+id/tb8"
-                    android:checked="false" android:layout_marginBottom="3dp"/>
-            <ToggleButton
+                    android:textOn="N" />
+
+                <ToggleButton
+                    android:id="@+id/tb15"
                     android:layout_width="45dp"
                     android:layout_height="30dp"
-                    android:text="E"
+                    android:layout_marginBottom="3dp"
                     android:layout_weight="1"
+                    android:checked="false"
+                    android:text="E"
                     android:textOff="E"
-                    android:textOn="E"
-                    android:id="@+id/tb9"
-                    android:checked="false" android:layout_marginBottom="3dp"/>
+                    android:textOn="E" />
+            </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
-</LinearLayout>
-    <LinearLayout
+
+        <LinearLayout
+            android:id="@+id/satDay"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/secRow"
             android:layout_weight="1"
-            android:weightSum="3">
-        <LinearLayout
+            android:orientation="vertical"
+            android:weightSum="4" >
+
+            <ImageView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/Thursday"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:weightSum="4">
-            <ImageView
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="3.3"
-                    android:src="@drawable/orange"/>
-            <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="fill_parent"
-                    android:layout_weight="0.7"
+                android:layout_weight="3.2"
+                android:src="@drawable/orange" />
 
-                    android:weightSum="3" >
-                <ToggleButton
-                        android:layout_width="45dp"
-                        android:layout_height="30dip"
-                        android:text="M"
-                        android:layout_weight="1"
-                        android:textOff="M"
-                        android:textOn="M"
-                        android:layout_marginRight="-8dip"
-                        android:id="@+id/tb10"
-                        android:checked="false"/>
-                <ToggleButton
-                        android:layout_width="45dp"
-                        android:layout_height="30dp"
-                        android:text="M"
-                        android:textOff="N"
-                        android:layout_weight="1"
-                        android:textOn="N"
-                        android:layout_marginRight="-8dip"
-                        android:id="@+id/tb11"
-                        android:checked="false" android:layout_marginBottom="3dp"/>
-                <ToggleButton
-                        android:layout_width="45dp"
-                        android:layout_height="30dp"
-                        android:text="E"
-                        android:layout_weight="1"
-                        android:textOff="E"
-                        android:textOn="E"
-                        android:id="@+id/tb12"
-                        android:checked="false" android:layout_marginBottom="3dp"/>
-            </LinearLayout>
-        </LinearLayout>
-        <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/friDay"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:weightSum="4">
-            <ImageView
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="3.3"
-                    android:src="@drawable/orange"/>
             <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="fill_parent"
-                    android:layout_weight="0.7"
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="0.8"
+                android:weightSum="3" >
 
-                    android:weightSum="3" >
                 <ToggleButton
-                        android:layout_width="45dp"
-                        android:layout_height="30dip"
-                        android:text="M"
-                        android:layout_weight="1"
-                        android:textOff="M"
-                        android:textOn="M"
-                        android:layout_marginRight="-8dip"
-                        android:id="@+id/tb13"
-                        android:checked="false"/>
-                <ToggleButton
-                        android:layout_width="45dp"
-                        android:layout_height="30dp"
-                        android:text="M"
-                        android:textOff="N"
-                        android:layout_weight="1"
-                        android:textOn="N"
-                        android:layout_marginRight="-8dip"
-                        android:id="@+id/tb14"
-                        android:checked="false" android:layout_marginBottom="3dp"/>
-                <ToggleButton
-                        android:layout_width="45dp"
-                        android:layout_height="30dp"
-                        android:text="E"
-                        android:layout_weight="1"
-                        android:textOff="E"
-                        android:textOn="E"
-                        android:id="@+id/tb15"
-                        android:checked="false" android:layout_marginBottom="3dp"/>
-            </LinearLayout>
-        </LinearLayout>
-        <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/satDay"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:weightSum="4">
-            <ImageView
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="3.3"
-                    android:src="@drawable/orange"/>
-            <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="fill_parent"
-                    android:layout_weight="0.7"
+                    android:id="@+id/tb16"
+                    android:layout_width="45dp"
+                    android:layout_height="30dip"
+                    android:layout_marginRight="-8dip"
+                    android:layout_weight="1"
+                    android:checked="false"
+                    android:text="M"
+                    android:textOff="M"
+                    android:textOn="M" />
 
-                    android:weightSum="3" >
                 <ToggleButton
-                        android:layout_width="45dp"
-                        android:layout_height="30dip"
-                        android:text="M"
-                        android:layout_weight="1"
-                        android:textOff="M"
-                        android:textOn="M"
-                        android:layout_marginRight="-8dip"
-                        android:id="@+id/tb16"
-                        android:checked="false"/>
+                    android:id="@+id/tb17"
+                    android:layout_width="45dp"
+                    android:layout_height="30dp"
+                    android:layout_marginBottom="3dp"
+                    android:layout_marginRight="-8dip"
+                    android:layout_weight="1"
+                    android:checked="false"
+                    android:text="M"
+                    android:textOff="N"
+                    android:textOn="N" />
+
                 <ToggleButton
-                        android:layout_width="45dp"
-                        android:layout_height="30dp"
-                        android:text="M"
-                        android:textOff="N"
-                        android:layout_weight="1"
-                        android:textOn="N"
-                        android:layout_marginRight="-8dip"
-                        android:id="@+id/tb17"
-                        android:checked="false" android:layout_marginBottom="3dp"/>
-                <ToggleButton
-                        android:layout_width="45dp"
-                        android:layout_height="30dp"
-                        android:text="E"
-                        android:layout_weight="1"
-                        android:textOff="E"
-                        android:textOn="E"
-                        android:id="@+id/tb18"
-                        android:checked="false" android:layout_marginBottom="3dp"/>
+                    android:id="@+id/tb18"
+                    android:layout_width="45dp"
+                    android:layout_height="30dp"
+                    android:layout_marginBottom="3dp"
+                    android:layout_weight="1"
+                    android:checked="false"
+                    android:text="E"
+                    android:textOff="E"
+                    android:textOn="E" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
+
     <LinearLayout
+        android:id="@+id/thirdRow"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:weightSum="3" >
+
+        <LinearLayout
+            android:id="@+id/allDays"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/thirdRow"
             android:layout_weight="1"
-            android:weightSum="3">
-        <LinearLayout
+            android:visibility="invisible"
+            android:orientation="vertical"
+            android:weightSum="4" >
+
+            <ImageView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/allDays"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:weightSum="4">
-            <ImageView
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="3.3"
-                    android:src="@drawable/orange"/>
-            <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="fill_parent"
-                    android:layout_weight="0.7"
+                android:layout_weight="3.2"
+                android:src="@drawable/orange" />
 
-                    android:weightSum="3" >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="0.8"
+                android:weightSum="3" >
+
                 <ToggleButton
-                        android:layout_width="45dp"
-                        android:layout_height="30dip"
-                        android:text="M"
-                        android:layout_weight="1"
-                        android:textOff="M"
-                        android:textOn="M"
-                        android:layout_marginRight="-8dip"
-                        android:id="@+id/tb19"
-                        android:checked="false"/>
+                    android:id="@+id/tb22"
+                    android:layout_width="45dp"
+                    android:layout_height="30dip"
+                    android:layout_marginRight="-8dip"
+                    android:layout_weight="1"
+                    android:checked="false"
+                    android:text="M"
+                    android:textOff="M"
+                    android:textOn="M" />
+
                 <ToggleButton
-                        android:layout_width="45dp"
-                        android:layout_height="30dp"
-                        android:text="M"
-                        android:textOff="N"
-                        android:layout_weight="1"
-                        android:textOn="N"
-                        android:layout_marginRight="-8dip"
-                        android:id="@+id/tb20"
-                        android:checked="false" android:layout_marginBottom="3dp"/>
+                    android:id="@+id/tb23"
+                    android:layout_width="45dp"
+                    android:layout_height="30dp"
+                    android:layout_marginBottom="3dp"
+                    android:layout_marginRight="-8dip"
+                    android:layout_weight="1"
+                    android:checked="false"
+                    android:text="M"
+                    android:textOff="N"
+                    android:textOn="N" />
+
                 <ToggleButton
-                        android:layout_width="45dp"
-                        android:layout_height="30dp"
-                        android:text="E"
-                        android:layout_weight="1"
-                        android:textOff="E"
-                        android:textOn="E"
-                        android:id="@+id/tb21"
-                        android:checked="false" android:layout_marginBottom="3dp"/>
+                    android:id="@+id/tb24"
+                    android:layout_width="45dp"
+                    android:layout_height="30dp"
+                    android:layout_marginBottom="3dp"
+                    android:layout_weight="1"
+                    android:checked="false"
+                    android:text="E"
+                    android:textOff="E"
+                    android:textOn="E" />
             </LinearLayout>
         </LinearLayout>
+
         <LinearLayout
+            android:id="@+id/sunDay"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:weightSum="4" >
+
+            <ImageView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/sunDay"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:weightSum="4">
-            <ImageView
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="3.3"
-                    android:src="@drawable/orange"/>
-            <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="fill_parent"
-                    android:layout_weight="0.7"
+                android:layout_weight="3.2"
+                android:src="@drawable/orange" />
 
-                    android:weightSum="3" >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="0.8"
+                android:weightSum="3" >
+
                 <ToggleButton
-                        android:layout_width="45dp"
-                        android:layout_height="30dip"
-                        android:text="M"
-                        android:layout_weight="1"
-                        android:textOff="M"
-                        android:textOn="M"
-                        android:layout_marginRight="-12dp"
-                        android:id="@+id/tb22"
-                        android:checked="false"/>
+                    android:id="@+id/tb19"
+                    android:layout_width="45dp"
+                    android:layout_height="30dip"
+                    android:layout_marginRight="-12dp"
+                    android:layout_weight="1"
+                    android:checked="false"
+                    android:text="M"
+                    android:textOff="M"
+                    android:textOn="M" />
+
                 <ToggleButton
-                        android:layout_width="45dp"
-                        android:layout_height="30dp"
-                        android:text="M"
-                        android:textOff="N"
-                        android:layout_weight="1"
-                        android:textOn="N"
-                        android:layout_marginRight="-12dp"
-                        android:id="@+id/tb23"
-                        android:checked="false" android:layout_marginBottom="3dp"/>
+                    android:id="@+id/tb20"
+                    android:layout_width="45dp"
+                    android:layout_height="30dp"
+                    android:layout_marginBottom="3dp"
+                    android:layout_marginRight="-12dp"
+                    android:layout_weight="1"
+                    android:checked="false"
+                    android:text="M"
+                    android:textOff="N"
+                    android:textOn="N" />
+
                 <ToggleButton
-                        android:layout_width="45dp"
-                        android:layout_height="30dp"
-                        android:text="E"
-                        android:layout_weight="1"
-                        android:textOff="E"
-                        android:textOn="E"
-                        android:id="@+id/tb24"
-                        android:checked="false" android:layout_marginBottom="3dp"/>
+                    android:id="@+id/tb21"
+                    android:layout_width="45dp"
+                    android:layout_height="30dp"
+                    android:layout_marginBottom="3dp"
+                    android:layout_weight="1"
+                    android:checked="false"
+                    android:text="E"
+                    android:textOff="E"
+                    android:textOn="E" />
             </LinearLayout>
         </LinearLayout>
+
         <LinearLayout
+            android:id="@+id/Alterday"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:visibility="invisible"
+            android:orientation="vertical"
+            android:weightSum="4" >
+
+            <ImageView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/Alterday"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:weightSum="4">
-            <ImageView
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="3.3"
-                    android:src="@drawable/orange"/>
-            <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="fill_parent"
-                    android:layout_weight="0.7"
+                android:layout_weight="3.2"
+                android:src="@drawable/orange" />
 
-                    android:weightSum="3" >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="0.8"
+                android:weightSum="3" >
+
                 <ToggleButton
-                        android:layout_width="45dp"
-                        android:layout_height="30dip"
-                        android:text="M"
-                        android:layout_weight="1"
-                        android:textOff="M"
-                        android:textOn="M"
-                        android:layout_marginRight="-8dip"
-                        android:id="@+id/tb25"
-                        android:checked="false"/>
+                    android:id="@+id/tb25"
+                    android:layout_width="45dp"
+                    android:layout_height="30dip"
+                    android:layout_marginRight="-8dip"
+                    android:layout_weight="1"
+                    android:checked="false"
+                    android:text="M"
+                    android:textOff="M"
+                    android:textOn="M" />
+
                 <ToggleButton
-                        android:layout_width="45dp"
-                        android:layout_height="30dp"
-                        android:text="M"
-                        android:textOff="N"
-                        android:layout_weight="1"
-                        android:textOn="N"
-                        android:layout_marginRight="-8dip"
-                        android:id="@+id/tb26"
-                        android:checked="false" android:layout_marginBottom="3dp"/>
+                    android:id="@+id/tb26"
+                    android:layout_width="45dp"
+                    android:layout_height="30dp"
+                    android:layout_marginBottom="3dp"
+                    android:layout_marginRight="-8dip"
+                    android:layout_weight="1"
+                    android:checked="false"
+                    android:text="M"
+                    android:textOff="N"
+                    android:textOn="N" />
+
                 <ToggleButton
-                        android:layout_width="45dp"
-                        android:layout_height="30dp"
-                        android:text="E"
-                        android:layout_weight="1"
-                        android:textOff="E"
-                        android:textOn="E"
-                        android:id="@+id/tb27"
-                        android:checked="false" android:layout_marginBottom="3dp"/>
+                    android:id="@+id/tb27"
+                    android:layout_width="45dp"
+                    android:layout_height="30dp"
+                    android:layout_marginBottom="3dp"
+                    android:layout_weight="1"
+                    android:checked="false"
+                    android:text="E"
+                    android:textOff="E"
+                    android:textOn="E" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

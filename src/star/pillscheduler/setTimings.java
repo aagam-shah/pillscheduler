@@ -18,9 +18,10 @@ public class setTimings extends SherlockActivity{
 
 	public ToggleButton[] tg = new ToggleButton[27];
 	
-	public int[]ids={R.id.tb1,R.id.tb2,R.id.tb3,R.id.tb4,R.id.tb5,R.id.tb6,R.id.tb7,R.id.tb8,R.id.tb9,
-	R.id.tb10,R.id.tb11,R.id.tb12,R.id.tb13,R.id.tb14,R.id.tb15,R.id.tb16,R.id.tb17,R.id.tb18,R.id.tb19,R.id.tb20,
-	R.id.tb21,R.id.tb22,R.id.tb23,R.id.tb24,R.id.tb25,R.id.tb26,R.id.tb27};
+	public int[]ids={R.id.tb19,R.id.tb20,R.id.tb21,R.id.tb1,R.id.tb2,R.id.tb3, 
+			R.id.tb4,R.id.tb5,R.id.tb6,R.id.tb7,R.id.tb8,R.id.tb9,
+			R.id.tb10,R.id.tb11,R.id.tb12,R.id.tb13,R.id.tb14,R.id.tb15,R.id.tb16,R.id.tb17, 
+			R.id.tb18,R.id.tb22,R.id.tb23,R.id.tb24,R.id.tb25,R.id.tb26,R.id.tb27};
 
 
 	@Override
@@ -29,7 +30,10 @@ public class setTimings extends SherlockActivity{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.days);
 		ActionBar actionBar = getSupportActionBar();
-		startActionMode(mActionModeCallback);
+		//startActionMode(mActionModeCallback);
+		actionBar.setDisplayHomeAsUpEnabled(true);
+        
+        actionBar.setTitle("Select Time");
 		initToggleButtons();
 		
 		
@@ -46,17 +50,24 @@ public class setTimings extends SherlockActivity{
 		
 	}
 	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getSupportMenuInflater().inflate(R.menu.savemenu, menu);
+		return true;
+	}
+	
 	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// TODO Auto-generated method stub
 		switch(item.getItemId()){
-    	case R.id.saveButton:
+		case R.id.saveButton:
     		Log.e("hello", "save");
     		savedays();
     		Intent i =new Intent();
 //    		i.putextra
-    		i.putExtra("lists",data);
+    		i.putExtra("lists", data);
     		setResult(Activity.RESULT_OK, i);
     		finish();
     		return true;

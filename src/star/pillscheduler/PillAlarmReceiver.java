@@ -2,6 +2,9 @@ package star.pillscheduler;
 
 import java.util.Iterator;
 import java.util.List;
+
+import android.app.Notification;
+import android.app.NotificationManager;
 import android.app.Service;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -22,15 +25,16 @@ public class PillAlarmReceiver extends BroadcastReceiver {
 		// arg0.startService(new Intent(arg0, PillService.class));
   		
   		
-		/*int val=0;
+		int val=0;
 		int d = i.getIntExtra("time", val);
 		PillDB pd = new PillDB(arg0);
 		List<Integer> result=pd.queryDB(d);
 		Iterator<Integer> ite = result.iterator();
 		
 		while(ite.hasNext()){
-			Log.e("ids", ""+ite.next());
-			
+			Notification n = new  Notification(R.drawable.orange, "Alarm"+ite.next(), System.currentTimeMillis());
+			NotificationManager nm =(NotificationManager)arg0.getSystemService(Context.NOTIFICATION_SERVICE);
+			nm.notify(4, n);
 			
 		}
 		/*LayoutInflater layoutInflater 

@@ -164,7 +164,7 @@ public long addAlarm(PillAlarm newA,String uri){
 			Calendar c = Calendar.getInstance();
 			int day =c.get(Calendar.DAY_OF_WEEK);
 			
-			day=(day-2)*3;
+			day=(day-1)*3;
 			
 			String ss=s.substring(day, day+3);
 			curr=getStatus(ss);
@@ -178,7 +178,7 @@ public long addAlarm(PillAlarm newA,String uri){
 	}
 
 //A 3 char string is passed and accordingly M,N,E is printed
-	private static String getStatus(String ss) {
+	private  String getStatus(String ss) {
 		// TODO Auto-generated method stub
 		String tp="";
 		StringBuilder sb = new StringBuilder(tp);

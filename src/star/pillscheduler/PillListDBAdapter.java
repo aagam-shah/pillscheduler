@@ -89,8 +89,12 @@ public class PillListDBAdapter extends SimpleCursorAdapter{
 		descr.setText(cursor.getString(cursor.getColumnIndex(PillDB.descrDB)));
 		name.setText(cursor.getString(cursor.getColumnIndex(PillDB.nameDB)));
 		pillNo.setText(curs.getString(cursor.getColumnIndex("pillsleft")));
-		if(Integer.parseInt(pillNo.getText().toString())<10)
-			lay.setBackgroundColor(Color.rgb(197, 226, 109));
+		if(Integer.parseInt(pillNo.getText().toString())<5)
+			//lay.setBackgroundColor(Color.rgb(197, 226, 109));green
+			lay.setBackgroundColor(Color.rgb(255, 148, 148));
+		else if(Integer.parseInt(pillNo.getText().toString())<10)
+			lay.setBackgroundColor(Color.rgb(255, 175, 175));//less red
+		
 		
 		delete.setOnClickListener(new OnClickListener() {
 			

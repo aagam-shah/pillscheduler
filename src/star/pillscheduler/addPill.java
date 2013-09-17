@@ -134,9 +134,7 @@ public class addPill extends SherlockActivity {
 		switch(item.getItemId()){
 		
 		case android.R.id.home:
-			Intent intent = new Intent(this, MainActivity.class);
-	        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-	        startActivity(intent);
+			showDialog(455);
 	        return true;
 	        
     	case R.id.saveButton:
@@ -169,6 +167,8 @@ public class addPill extends SherlockActivity {
 		switch(id){
 		case 2:
 			return createPillDialog();
+		case 455:
+			return createConfirmDialog();
 		default:
 			return null;
 		
@@ -177,6 +177,34 @@ public class addPill extends SherlockActivity {
 
 
 
+	private Dialog createConfirmDialog() {
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Warning");
+       
+         builder.setCancelable(false);
+        builder.setNegativeButton("Discard", new DialogInterface.OnClickListener() {
+ 
+            @Override
+            public void onClick(DialogInterface dialog, int whichButton) {
+            	Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+    	        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+    	        startActivity(intent);
+                return;
+            }
+        });
+ 
+        builder.setPositiveButton("Save", new DialogInterface.OnClickListener() {
+ 
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+            	savePill();
+        		finish();
+                return;
+            }
+        });
+ 
+        return builder.create();
+	}
 	private Dialog createPillDialog() {
 		 AlertDialog.Builder builder = new AlertDialog.Builder(this);
 	        builder.setTitle("Pill Select no of pills");
@@ -229,9 +257,7 @@ public class addPill extends SherlockActivity {
 		
 		else if(requestCode==100){
 			///camera here :)
-			//picUri = data.getData();
-			Log.e("picnewuir", "pl"+location);
-			//String s =picUri.getEncodedPath();
+			
 			InputStream stream = null;
 			try {
 				stream = getContentResolver().openInputStream(data.getData());
@@ -250,9 +276,7 @@ public class addPill extends SherlockActivity {
 			
 		}
 		else{
-			//gg
-			Toast.makeText(this, "Added w/o", Toast.LENGTH_SHORT).show();
-			Log.e("camera", "gone here");
+			//if no pill days selected
 			
 		}
 		
