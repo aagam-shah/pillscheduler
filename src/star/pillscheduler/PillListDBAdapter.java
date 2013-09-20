@@ -9,10 +9,14 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.Bitmap.Config;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.graphics.Path;
+import android.graphics.PorterDuff.Mode;
+import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -40,15 +44,16 @@ public class PillListDBAdapter extends SimpleCursorAdapter{
 	public int[] to;
 	public LayoutInflater inflater;
 	public int targetWH;
-	
+	public TextView tv;
 	public PillListDBAdapter(Context context, int layout, Cursor c,
-			String[] from, int[] to) {
+			String[] from, int[] to, TextView tv1) {
 		super(context, layout, c, from, to);
 		this.ctx=context;
 		this.layoutid=layout;
 		this.curs=c;
 		this.from=from;
 		this.to=to;
+		this.tv = tv1;
 		float scale = ctx.getResources().getDisplayMetrics().density;
 		targetWH = (int) (60 * scale + 0.5f);
 		inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -74,12 +79,18 @@ public class PillListDBAdapter extends SimpleCursorAdapter{
 
 	@Override
 	public void bindView(final View view, final Context context, final Cursor cursor) {
+		if(cursor.getCount()!=0){
+		
+			tv.setVisibility(View.GONE);
+		
+		}
+		
 		TextView name = (TextView)view.findViewById(R.id.list_row_title);
 		TextView descr = (TextView)view.findViewById(R.id.list_row_descr);
 		ImageView img = (ImageView)view.findViewById(R.id.pill_img);
 		Button edit = (Button)view.findViewById(R.id.list_edit_pill);
 		Button pillNo = (Button)view.findViewById(R.id.list_pills);
-		Button delete = (Button)view.findViewById(R.id.list_delete);
+		final Button delete = (Button)view.findViewById(R.id.list_delete);
 		final RelativeLayout lay = (RelativeLayout)view.findViewById(R.id.wrapper_list);
 		RelativeLayout img_text = (RelativeLayout)view.findViewById(R.id.pill_l);
 		final HorizontalScrollView hsv = (HorizontalScrollView)view.findViewById(R.id.scroll);
@@ -111,8 +122,12 @@ public class PillListDBAdapter extends SimpleCursorAdapter{
 						PillDB.delete(id);
 						Cursor c = getCursor();
 						c.requery();
-						
+						Log.e("count", ""+c.getCount());
+						if(c.getCount()==0)
+							tv.setVisibility(View.VISIBLE);
 					}
+
+					
 				});
 				
 				ad.setButton2("Cancel",new DialogInterface.OnClickListener() {
@@ -145,44 +160,39 @@ public class PillListDBAdapter extends SimpleCursorAdapter{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-			if(hsv.getVisibility()==View.GONE)
+			if(hsv.getVisibility()==View.GONE){
 				hsv.setVisibility(View.VISIBLE);
+				delete.setFocusable(true);
+			}
 			else
 				hsv.setVisibility(View.GONE);
 			}
 		});
 		
 	}
-	
-	
-	
-	
+		
 	private void setImage(ImageView v, String value) {
 		File imgFile = new  File(value);
 		if(imgFile.exists()){
 			BitmapFactory.Options options=new BitmapFactory.Options();
-			options.inSampleSize = 8;
+			options.inSampleSize = 10;
 			//Bitmap preview_bitmap=BitmapFactory.decodeStream(is,null,options);
-		    Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath(),options);
-		    Bitmap targetBitmap = Bitmap.createBitmap(targetWH, 
-                    targetWH,Bitmap.Config.ARGB_8888);
+		    Bitmap bitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath(),options);
+		    Bitmap output = Bitmap.createBitmap(30,
+		            30, Config.ARGB_8888);
+		    Canvas canvas = new Canvas(output);
 
-		    Canvas canvas = new Canvas(targetBitmap);
-	    	Path path = new Path();
-	    	path.addCircle(((float) targetWH - 1) / 2,
-	    			((float) targetWH - 1) / 2,
-	    			(Math.min(((float) targetWH), 
-	    					((float) targetWH)) / 2),
-	    							Path.Direction.CCW);
+		    final int color = 0xff424242;
+		    final Paint paint = new Paint();
+		    final Rect rect = new Rect(0, 0, 30, 30);
 
-	    	canvas.clipPath(path);
-	    	Bitmap sourceBitmap = myBitmap;
-	    	canvas.drawBitmap(sourceBitmap, 
-                        new Rect(0, 0, sourceBitmap.getWidth(),
-                        		sourceBitmap.getHeight()), 
-                        new Rect(0, 0, targetWH,
-                        		targetWH), null);
-		    v.setImageBitmap(sourceBitmap);
+		    paint.setAntiAlias(true);
+		    canvas.drawARGB(0, 0, 0, 0);
+		    paint.setColor(color);
+		    canvas.drawCircle(15, 15,15, paint);
+		    paint.setXfermode(new PorterDuffXfermode(Mode.SRC_IN));
+		    canvas.drawBitmap(bitmap, rect, rect, paint);
+		    v.setImageBitmap(output);
 
 		}
 		else{

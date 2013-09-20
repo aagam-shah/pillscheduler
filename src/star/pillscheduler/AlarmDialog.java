@@ -1,17 +1,18 @@
 package star.pillscheduler;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.Context;
-import android.content.DialogInterface;
+import android.app.NotificationManager;
 import android.os.Bundle;
-import android.view.MotionEvent;
-import android.view.WindowManager;
-import android.view.WindowManager.LayoutParams;
+import android.util.Log;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.TextView;
 
 public class AlarmDialog extends Activity {
 
-	
+	public TextView pName, pNumber;
+	public Button pTaken, pNot;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -25,43 +26,45 @@ public class AlarmDialog extends Activity {
 		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON+
 	            WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD+
 	            WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED+
-	            WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON);
-		setContentView(R.layout.ringdialog);*/
+	            WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON);*/
 		
+		final int pillId = getIntent().getIntExtra("id", 0);
 		super.onCreate(savedInstanceState);
-		//setContentView(R.layout.main);
-		Context ctx = this;
+		setContentView(R.layout.ringdialog);
+		final PillAlarm pa = PillDB.getPill(pillId);
 		
-		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		// Add the buttons
-		builder.setMessage("asda asda asdad asdad adads");
-		builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-		           public void onClick(DialogInterface dialog, int id) {
-		               // User clicked OK button
-		        	   finish();
-		           }
-		       });
-		builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-		           public void onClick(DialogInterface dialog, int id) {
-		               // User cancelled the dialog
-		           }
-		       });
-		builder.create();
-		builder.show();
+		pName  =(TextView)findViewById(R.id.alarm_pillnname);
+		pName.setText(pa.getTitle());
+		pNumber  =(TextView)findViewById(R.id.alarm_pillno);
+		pNumber.setText(""+pa.getPills());
+		pTaken = (Button)findViewById(R.id.alarm_taken);
+		pNot = (Button)findViewById(R.id.alarm_nottaken);
+
+		pTaken.setOnClickListener(new  OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				int value = pa.getPills();
+				Log.e("taken", ""+pa.getTitle());
+				PillDB.update(pillId,value+5);
+				NotificationManager m = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
+				m.cancel(23+pillId);
+				finish();
+				
+			}
+		});
+		
+		pNot.setOnClickListener(new  OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Log.e("not taken pill", "clked");
+				NotificationManager m = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
+				m.cancel(23+pillId);
+				finish();
+			}
+		});
+		
 	}
-	
-	/*@Override
-	  public boolean onTouchEvent(MotionEvent event) {
-	    // If we've received a touch notification that the user has touched
-	    // outside the app, finish the activity.
-	    if (MotionEvent.ACTION_OUTSIDE == event.getAction()) {
-	      //finish();s
-	      return true;
-	    }
-
-	    // Delegate everything else to Activity.
-	    return false;
-	  }*/
-
 	
 }

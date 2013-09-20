@@ -37,7 +37,7 @@ public class PillDB {
 	public int databseID=1;
 	
 	
-	//create DB
+	//create DB//
 	public PillDB(Context ctx){
 		context=ctx;
 		try{
@@ -132,7 +132,7 @@ public long addAlarm(PillAlarm newA,String uri){
 	public static Cursor getPillAlarms(){
 		
 		try{Cursor mCursor = db.query("lists", new String[] {"_id","name","descr","pillsleft","pilloc"}, 
-			    null, null, null, null, null);
+			    null, null, null, null, "_id DESC");
 			 
 			  if (mCursor != null) {
 			   mCursor.moveToFirst();
@@ -163,7 +163,6 @@ public long addAlarm(PillAlarm newA,String uri){
 			String s = curs.getString(1);
 			Calendar c = Calendar.getInstance();
 			int day =c.get(Calendar.DAY_OF_WEEK);
-			
 			day=(day-1)*3;
 			
 			String ss=s.substring(day, day+3);
@@ -218,6 +217,14 @@ public long addAlarm(PillAlarm newA,String uri){
 				 "0", cursor.getString(2), z);
 		 
 		 return pA;
+		
+	}
+
+	public static void update(int pillId, int value) {
+		ContentValues cv = new ContentValues();
+		cv.put("pillsleft", value);
+		
+		db.update("lists", cv, "_id=?", new String[] {""+pillId });
 		
 	}
 }

@@ -3,12 +3,21 @@ package star.pillscheduler;
 import java.util.Calendar;
 
 import android.app.AlarmManager;
+import android.app.Notification;
+import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationCompat.Builder;
 import android.util.Log;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.View.OnTouchListener;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.Menu;
@@ -24,22 +33,44 @@ public class MainActivity extends SherlockActivity{
 	public static boolean firstinsall=true;
 	public static Cursor c;
 	public PillDB pdb;
+	public TextView tv;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+//		getSupportActionBar().setDisplayShowHomeEnabled(false);
 		setContentView(R.layout.list);
-		getSupportActionBar().setDisplayShowHomeEnabled(false);
+		
 		pdb= new PillDB(this);
+		
 		
 		if(firstinsall){
 			firstinsall=false;
-			//tv1.setVisibility(View.VISIBLE);
 		startAlarm();
 		}
 		lv = (ListView)findViewById(R.id.listView);
+		tv= (TextView)findViewById(R.id.empty);
 		//tv1.setVisibility(View.VISIBLE);
 		listLoad();
+		NotificationCompat.Builder nm = new NotificationCompat.Builder(this)
+		.setSmallIcon(android.R.drawable.btn_star).setContentTitle("Title").setContentText("Helllooo");
+		NotificationManager nm1 = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
+		Intent i = new Intent(this,MainActivity.class);
+		PendingIntent ac = PendingIntent.getActivity(this, 0, i, 0);
+		//nm.setContentIntent(ac);
+		nm1.notify(12222, nm.build());
+		
+		tv.setOnTouchListener(new OnTouchListener() {
+			
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				Intent i = new Intent("star.pillscheduler.addPill");
+
+	             startActivity(i);
+				return false;
+			}
+		});
+		
 		
         }
 
@@ -72,6 +103,7 @@ public class MainActivity extends SherlockActivity{
 		
 		PendingIntent pt= PendingIntent.getBroadcast(this,3, i, PendingIntent.FLAG_UPDATE_CURRENT);
 		AlarmManager am = (AlarmManager) getSystemService(this.ALARM_SERVICE);
+		//am.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(),oneDay, pt);
 		am.setRepeating(AlarmManager.RTC_WAKEUP, customM.getTimeInMillis(),oneDay, pt);
 		Log.e("setted","eve");
 	}
@@ -116,7 +148,7 @@ public class MainActivity extends SherlockActivity{
 		
 		PendingIntent pt= PendingIntent.getBroadcast(this,1, i, PendingIntent.FLAG_UPDATE_CURRENT);
 		AlarmManager am = (AlarmManager) getSystemService(this.ALARM_SERVICE);
-		am.setRepeating(AlarmManager.RTC_WAKEUP, 1,oneDay, pt);
+		am.setRepeating(AlarmManager.RTC_WAKEUP, customM.getTimeInMillis(),oneDay, pt);
 		Log.e("setted","morn");
 	}
 
@@ -140,10 +172,12 @@ public class MainActivity extends SherlockActivity{
         	  };
         	 
         c =pdb.getPillAlarms();
-				
-		PillListDBAdapter pldb = new PillListDBAdapter(this, R.layout.list_row, c, columns, to);
+        if(c.getCount()==0)
+        	tv.setVisibility(View.VISIBLE);
+		PillListDBAdapter pldb = new PillListDBAdapter(this, R.layout.list_row, c, columns, to,tv);
 		
 		lv.setAdapter(pldb);
+		
 		
 		
 	}

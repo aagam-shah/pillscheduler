@@ -15,7 +15,6 @@
             android:id="@+id/pill_img"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:background="@drawable/imageborder"
             android:src="@drawable/ic_launcher" />
 
         <LinearLayout

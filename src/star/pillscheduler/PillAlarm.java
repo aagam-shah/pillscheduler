@@ -17,7 +17,7 @@ public class PillAlarm {
 		this.title=t;
 		this.descr=d;
 		this.pillsLeft=totalPills;
-		daysTime=timings;
+		this.daysTime=timings;
 			}
 
 	public PillAlarm(String t, String d, String timings, String imguri,int totalPills) {
@@ -25,7 +25,7 @@ public class PillAlarm {
 		this.title=t;
 		this.descr=d;
 		this.pillsLeft=totalPills;
-		daysTime=timings;
+		this.daysTime=timings;
 		this.imLoc = imguri;
 	}
 
