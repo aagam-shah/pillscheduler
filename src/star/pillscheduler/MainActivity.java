@@ -54,6 +54,8 @@ public class MainActivity extends SherlockActivity{
 		listLoad();
 		NotificationCompat.Builder nm = new NotificationCompat.Builder(this)
 		.setSmallIcon(android.R.drawable.btn_star).setContentTitle("Title").setContentText("Helllooo");
+		
+		nm.setTicker("hello I am very very happpppppyyy asda pol pada sd apd aspdapd apsdpadspd");
 		NotificationManager nm1 = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
 		Intent i = new Intent(this,MainActivity.class);
 		PendingIntent ac = PendingIntent.getActivity(this, 0, i, 0);

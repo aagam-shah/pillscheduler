@@ -43,7 +43,6 @@ public class PillListDBAdapter extends SimpleCursorAdapter{
 	public String[] from;
 	public int[] to;
 	public LayoutInflater inflater;
-	public int targetWH;
 	public TextView tv;
 	public PillListDBAdapter(Context context, int layout, Cursor c,
 			String[] from, int[] to, TextView tv1) {
@@ -55,7 +54,6 @@ public class PillListDBAdapter extends SimpleCursorAdapter{
 		this.to=to;
 		this.tv = tv1;
 		float scale = ctx.getResources().getDisplayMetrics().density;
-		targetWH = (int) (60 * scale + 0.5f);
 		inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		// TODO Auto-generated constructor stub
 	}
@@ -172,26 +170,37 @@ public class PillListDBAdapter extends SimpleCursorAdapter{
 	}
 		
 	private void setImage(ImageView v, String value) {
+		int radiuss = v.getWidth();
+		Log.e("input width",""+radiuss);
+		int radius=60;
 		File imgFile = new  File(value);
 		if(imgFile.exists()){
 			BitmapFactory.Options options=new BitmapFactory.Options();
-			options.inSampleSize = 10;
+			options.inSampleSize = 5;
 			//Bitmap preview_bitmap=BitmapFactory.decodeStream(is,null,options);
-		    Bitmap bitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath(),options);
-		    Bitmap output = Bitmap.createBitmap(30,
-		            30, Config.ARGB_8888);
+		    Bitmap bmp = BitmapFactory.decodeFile(imgFile.getAbsolutePath(),options);
+		    Bitmap sbmp;
+		    if(bmp.getWidth() != radius || bmp.getHeight() != radius)
+		        sbmp = Bitmap.createScaledBitmap(bmp, radius, radius, false);
+		    else
+		        sbmp = bmp;
+		    Bitmap output = Bitmap.createBitmap(sbmp.getWidth(),
+		            sbmp.getHeight(), Config.ARGB_8888);
 		    Canvas canvas = new Canvas(output);
 
-		    final int color = 0xff424242;
+		    final int color = 0xffa19774;
 		    final Paint paint = new Paint();
-		    final Rect rect = new Rect(0, 0, 30, 30);
+		    final Rect rect = new Rect(0, 0, sbmp.getWidth(), sbmp.getHeight());
 
 		    paint.setAntiAlias(true);
+		    paint.setFilterBitmap(true);
+		    paint.setDither(true);
 		    canvas.drawARGB(0, 0, 0, 0);
-		    paint.setColor(color);
-		    canvas.drawCircle(15, 15,15, paint);
+		    paint.setColor(Color.parseColor("#BAB399"));
+		    canvas.drawCircle(sbmp.getWidth() / 2+0.7f, sbmp.getHeight() / 2+0.7f,
+		            sbmp.getWidth() / 2+0.1f, paint);
 		    paint.setXfermode(new PorterDuffXfermode(Mode.SRC_IN));
-		    canvas.drawBitmap(bitmap, rect, rect, paint);
+		    canvas.drawBitmap(sbmp, rect, rect, paint);
 		    v.setImageBitmap(output);
 
 		}

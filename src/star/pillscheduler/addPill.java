@@ -2,6 +2,7 @@ package star.pillscheduler;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.Calendar;
 
@@ -15,6 +16,9 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Matrix;
+import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -266,10 +270,25 @@ public class addPill extends SherlockActivity {
 				e.printStackTrace();
 			}
 	        Bitmap bitmap = BitmapFactory.decodeStream(stream);
+	        Bitmap p = bitmap;
+	        Bitmap rotatedBitmap = null;
+	       try {
+			ExifInterface exif = new ExifInterface(location);
+			int orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
+			   
+			Matrix matrix = new Matrix();
 
-	       
+			matrix.postRotate(90);
+			rotatedBitmap = Bitmap.createBitmap(p , 0, 0, p .getWidth(), 
+					p .getHeight(), matrix, true);
+			pillImg.setImageBitmap(rotatedBitmap);
+			Log.e("orient",""+orientation);
+		} catch (Exception e) {
+			Log.e("error","exif");
+			Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show();
+		}
 			
-			pillImg.setImageBitmap(bitmap);
+			//pillImg.setImageBitmap(rotatedBitmap);
 			isIMG=true;
 			Toast.makeText(this, "Added", Toast.LENGTH_SHORT).show();
 			//Log.e("camera", ""+s);
