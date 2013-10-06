@@ -1,13 +1,15 @@
 package star.pillscheduler;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.NotificationManager;
+import android.content.DialogInterface;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.view.View.OnClickListener;
+import android.text.InputType;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class AlarmDialog extends Activity {
 
@@ -16,21 +18,17 @@ public class AlarmDialog extends Activity {
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
-		/*super.onCreate(savedInstanceState);
-		// Make us non-modal, so that others can receive touch events.
-	  //  getWindow().setFlags(LayoutParams.FLAG_NOT_TOUCH_MODAL, LayoutParams.FLAG_NOT_TOUCH_MODAL);
-
-	    // ...but notify us that it happened.
-	    getWindow().setFlags(LayoutParams.FLAG_WATCH_OUTSIDE_TOUCH, LayoutParams.FLAG_WATCH_OUTSIDE_TOUCH);
-		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON+
-	            WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD+
-	            WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED+
-	            WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON);*/
-		
-		final int pillId = getIntent().getIntExtra("id", 0);
+	/*	
+		final int pillIdfetched = getIntent().getIntExtra("id", 0);
+		final int d = getIntent().getIntExtra("d", 0);
+		final int pillId = pillIdfetched-d;
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.ringdialog);
+		
+		if(android.os.Build.VERSION.SDK_INT>=11){
+		this.setFinishOnTouchOutside(false);
+		}
+		
 		final PillAlarm pa = PillDB.getPill(pillId);
 		
 		pName  =(TextView)findViewById(R.id.alarm_pillnname);
@@ -45,10 +43,10 @@ public class AlarmDialog extends Activity {
 			@Override
 			public void onClick(View v) {
 				int value = pa.getPills();
-				Log.e("taken", ""+pa.getTitle());
+				Log.e("Alarm Dialog pillId", ""+pillId);
 				PillDB.update(pillId,value+5);
 				NotificationManager m = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
-				m.cancel(23+pillId);
+				m.cancel(pillIdfetched);
 				finish();
 				
 			}
@@ -60,10 +58,45 @@ public class AlarmDialog extends Activity {
 			public void onClick(View v) {
 				Log.e("not taken pill", "clked");
 				NotificationManager m = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
-				m.cancel(23+pillId);
+				m.cancel(pillId);
 				finish();
 			}
 		});
+		*/
+		
+		super.onCreate(savedInstanceState);
+		final int pillIdfetched = getIntent().getIntExtra("id", 0);
+		final int d = getIntent().getIntExtra("d", 0);
+		final int pillId = pillIdfetched-d;
+		final PillAlarm pa = PillDB.getPill(pillId);
+		
+	    AlertDialog.Builder builder = new AlertDialog.Builder(this);
+	    builder
+	        .setTitle("asd ")
+	        .setMessage("Pills Left : ")
+	        .setCancelable(false)
+	        .setPositiveButton("Taken", new DialogInterface.OnClickListener() 
+	        {
+	            public void onClick(DialogInterface dialog, int id) 
+	            {
+	            	NotificationManager m = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
+					m.cancel(pillId);
+	                dialog.cancel();
+	                finish();
+	            }
+	        })
+	        .setNegativeButton("Not Taken", new DialogInterface.OnClickListener() 
+	        {
+	            public void onClick(DialogInterface dialog, int id) 
+	            {
+	            	NotificationManager m = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
+					m.cancel(pillId);
+	                dialog.cancel();
+	                finish();
+	            }
+	        });
+	    AlertDialog alert = builder.create();
+	    alert.show();
 		
 	}
 	

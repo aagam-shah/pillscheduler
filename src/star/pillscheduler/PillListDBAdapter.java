@@ -77,11 +77,11 @@ public class PillListDBAdapter extends SimpleCursorAdapter{
 
 	@Override
 	public void bindView(final View view, final Context context, final Cursor cursor) {
-		if(cursor.getCount()!=0){
-		
-			tv.setVisibility(View.GONE);
-		
-		}
+//		if(cursor.getCount()!=0){
+//		
+//			tv.setVisibility(View.GONE);
+//		
+//		}
 		
 		TextView name = (TextView)view.findViewById(R.id.list_row_title);
 		TextView descr = (TextView)view.findViewById(R.id.list_row_descr);
@@ -121,8 +121,8 @@ public class PillListDBAdapter extends SimpleCursorAdapter{
 						Cursor c = getCursor();
 						c.requery();
 						Log.e("count", ""+c.getCount());
-						if(c.getCount()==0)
-							tv.setVisibility(View.VISIBLE);
+						if(c.getCount()==0){}
+						//	tv.setVisibility(View.VISIBLE);
 					}
 
 					
@@ -170,8 +170,6 @@ public class PillListDBAdapter extends SimpleCursorAdapter{
 	}
 		
 	private void setImage(ImageView v, String value) {
-		int radiuss = v.getWidth();
-		Log.e("input width",""+radiuss);
 		int radius=60;
 		File imgFile = new  File(value);
 		if(imgFile.exists()){
@@ -205,9 +203,9 @@ public class PillListDBAdapter extends SimpleCursorAdapter{
 
 		}
 		else{
-			Log.e("ad", "doesnt exist"+value);
+		//	Log.e("ad", "doesnt exist"+value);
 		}
-		Log.e("ad", "asdc"+value);
+		//Log.e("ad", "asdc"+value);
 		//v.setImageURI(my);
 	}
 

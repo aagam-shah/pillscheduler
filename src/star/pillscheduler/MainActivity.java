@@ -49,7 +49,7 @@ public class MainActivity extends SherlockActivity{
 		startAlarm();
 		}
 		lv = (ListView)findViewById(R.id.listView);
-		tv= (TextView)findViewById(R.id.empty);
+		tv= (TextView)findViewById(android.R.id.empty);
 		//tv1.setVisibility(View.VISIBLE);
 		listLoad();
 		NotificationCompat.Builder nm = new NotificationCompat.Builder(this)
@@ -105,8 +105,8 @@ public class MainActivity extends SherlockActivity{
 		
 		PendingIntent pt= PendingIntent.getBroadcast(this,3, i, PendingIntent.FLAG_UPDATE_CURRENT);
 		AlarmManager am = (AlarmManager) getSystemService(this.ALARM_SERVICE);
-		//am.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(),oneDay, pt);
-		am.setRepeating(AlarmManager.RTC_WAKEUP, customM.getTimeInMillis(),oneDay, pt);
+		am.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(),oneDay, pt);
+		//am.setRepeating(AlarmManager.RTC_WAKEUP, customM.getTimeInMillis(),oneDay, pt);
 		Log.e("setted","eve");
 	}
 

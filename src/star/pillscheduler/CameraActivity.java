@@ -51,8 +51,8 @@ public class CameraActivity extends SherlockActivity{
 
 	        public void onPictureTaken(byte[] data, Camera camera) {
 
-	            File pictureFile = getOutputMediaFile(MEDIA_TYPE_IMAGE);
-
+	            //File pictureFile = getOutputMediaFile(MEDIA_TYPE_IMAGE);
+	        	File pictureFile =null;
 	            if (pictureFile == null){
 	                return;
 	            }
@@ -108,7 +108,7 @@ public class CameraActivity extends SherlockActivity{
     		finish();
     		return false;
     	default:
-    		Log.e("hello", "save");
+    	//	Log.e("hello", "save");
     		Toast.makeText(getApplicationContext(), "eror",Toast.LENGTH_SHORT).show();
     		return true;
     	}

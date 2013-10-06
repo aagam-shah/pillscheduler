@@ -14,33 +14,37 @@
         android:weightSum="2" >
 
         <ImageView
+            android:id="@+id/pillImg"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:id="@+id/pillImg"
             android:background="@drawable/editpillimg"
             android:src="@drawable/orange" />
-<LinearLayout android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" >
-            <TextView 
-                 android:textSize="20sp"
-                 android:paddingLeft="10dp"
-                 android:paddingBottom="6dp"
-                android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Pill Name"/>
-            
-        <EditText
-            android:id="@+id/pill_name"
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:singleLine="true"
-            android:nextFocusDown="@+id/pill_descr"
-            android:hint="Enter Pill Name" />
+            android:orientation="vertical" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="6dp"
+                android:paddingLeft="10dp"
+                android:text="Pill Name"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/pill_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="Enter Pill Name"
+                android:nextFocusDown="@+id/pill_descr"
+                android:singleLine="true" />
+        </LinearLayout>
     </LinearLayout>
-</LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -60,9 +64,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:nextFocusUp="@+id/pill_name"
-            android:nextFocusDown="@+id/cb1"
             android:hint="Enter Desct"
+            android:nextFocusDown="@+id/cb1"
+            android:nextFocusUp="@+id/pill_name"
             android:singleLine="true" />
     </LinearLayout>
 
@@ -89,34 +93,34 @@
             android:weightSum="5" >
 
             <CheckBox
+                android:id="@+id/cb1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:id="@+id/cb1"
                 android:text="5" />
 
             <CheckBox
+                android:id="@+id/cb2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="-10dp"
                 android:layout_weight="1"
-                android:id="@+id/cb2"
                 android:text="10" />
 
             <CheckBox
+                android:id="@+id/cb3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="-10dp"
                 android:layout_weight="1"
-                android:id="@+id/cb3"
                 android:text="20" />
 
             <CheckBox
+                android:id="@+id/cb4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="-10dp"
                 android:layout_weight="1"
-                android:id="@+id/cb4"
                 android:text="30" />
 
             <Button
@@ -130,9 +134,10 @@
     </LinearLayout>
 
     <Button
+        android:id="@+id/addtime"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/addtime"
-        android:text="Add timings" />
+        android:text="Add timings"
+        android:tint="#44FF0000" />
 
 </LinearLayout>
