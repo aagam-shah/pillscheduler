@@ -16,7 +16,7 @@
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:tint="#00FFFFFF"
-            android:src="@drawable/ic_launcher" />
+            android:src="@drawable/ic" />
 
         <LinearLayout
             android:id="@+id/linearLayout"
@@ -66,28 +66,44 @@
 
             <Button
                 android:id="@+id/checkb"
+                android:visibility="gone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                
                 android:text="checkb" />
 
             <Button
                 android:id="@+id/list_delete"
                 android:layout_width="wrap_content"
+                android:background="@drawable/curvedbutton"
                 android:layout_height="wrap_content"
+                android:layout_marginRight="15dp"
                 android:text="Delete" />
 
             <Button
                 android:id="@+id/list_pills"
                 android:layout_width="wrap_content"
                 android:background="@drawable/circle"
+                
                 android:layout_height="wrap_content"
+                android:layout_marginRight="15dp"
                 android:text="0" />
 
             <Button
                 android:id="@+id/list_edit_pill"
                 android:layout_width="wrap_content"
+                android:background="@drawable/curvedbutton"
                 android:layout_height="wrap_content"
+                android:layout_marginRight="15dp"
                 android:text="Edit" />
+            
+            <Button
+                android:id="@+id/list_order"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/curvedbutton"
+                android:layout_marginRight="15dp"
+                android:text="Order" />
         </LinearLayout>
     </HorizontalScrollView>
 

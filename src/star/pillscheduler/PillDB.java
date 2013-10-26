@@ -24,7 +24,7 @@ public class PillDB {
 	private static final String CREATE_TABLE_PILLS ="create table if not exists lists " +
 			"( _id integer primary key autoincrement, "
             + "name varchar(50), descr varchar(50), justNotify boolean default true," +
-            "pilloc varchar(60) default 'aagamshah',isimg boolean,pillsleft integer default 0,ringtone integer default 1);";
+            "pilloc varchar(60) default 'aagamshah',isimg boolean,dosage integer default 1,pillsleft integer default 0,ringtone integer default 1);";
 	
 	
 	private static final String CREATE_TABLE_DAYS="create table if not exists days "+
@@ -63,12 +63,14 @@ public class PillDB {
 		String title= newA.getTitle();
 		String descr = newA.getDescr();
 		String timings=newA.getTimings();
+		int dosage = newA.getDosage();
 		int pillsL=newA.getPills();
 		
 		ContentValues values = new ContentValues();
         values.put("name", title);
         values.put("descr", descr);
         values.put("pillsleft", pillsL);
+        values.put("dosage", dosage);
         values.put("isimg", false);
        // values.put("pillsLeft", 10);
         
@@ -91,6 +93,7 @@ public long addAlarm(PillAlarm newA,String uri){
 		String title= newA.getTitle();
 		String descr = newA.getDescr();
 		String timings=newA.getTimings();
+		int dosage = newA.getDosage();
 		int pillsL=newA.getPills();
 		
 		ContentValues values = new ContentValues();
@@ -99,6 +102,7 @@ public long addAlarm(PillAlarm newA,String uri){
         values.put("pillsleft", pillsL);
         values.put("isimg", true);
         values.put("pilloc", uri);
+        values.put("dosage", dosage);
        // values.put("pillsLeft", 10);
         
         
@@ -131,7 +135,7 @@ public long addAlarm(PillAlarm newA,String uri){
 //zto obtain a cursor of all the alarms	
 	public static Cursor getPillAlarms(){
 		
-		try{Cursor mCursor = db.query("lists", new String[] {"_id","name","descr","pillsleft","pilloc"}, 
+		try{Cursor mCursor = db.query("lists", new String[] {"_id","name","descr","pillsleft","pilloc","dosage"}, 
 			    null, null, null, null, "_id DESC");
 			 
 			  if (mCursor != null) {
@@ -205,16 +209,20 @@ public long addAlarm(PillAlarm newA,String uri){
 	}
 	
 	public static PillAlarm getPill(int id){
+		
 		Cursor cursor = db.query("lists", new String[] { "name",
-	            "descr", "pilloc","pillsLeft" }, "_id" + "=?",
+	            "descr", "pilloc","pillsLeft","dosage" }, "_id" + "=?",
 	            new String[] { String.valueOf(id) }, null, null, null, null);
 		 if (cursor != null)
 		        cursor.moveToFirst();
 		 
 		 int z = Integer.parseInt(cursor.getString(3));
 		 Log.e("getPill", "pills :"+z );
+		 Log.e("getPill", "id :"+id );
 		 PillAlarm pA = new  PillAlarm(cursor.getString(0), cursor.getString(1),
-				 "0", cursor.getString(2), z);
+				 "0", cursor.getString(2), z,cursor.getInt(4));
+		 cursor.close();
+		 //db.close();
 		 
 		 return pA;
 		

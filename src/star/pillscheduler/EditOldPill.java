@@ -30,7 +30,7 @@ public class EditOldPill extends SherlockActivity{
 	public Button timings;
 	public ImageView pillImg;
 	public int numberPills;
-	public EditText pName,pDescr,pNo;
+	public EditText pName,pDescr,pNo,pDose;
 	public String dayslist="000000000000000000000000000";
 	public boolean isIMG=false;
 	public int dialogvalue=0;
@@ -58,6 +58,8 @@ public class EditOldPill extends SherlockActivity{
 		setOldImage();
 		pName=(EditText)findViewById(R.id.epill_name);
 		pName.setText(pillAlarm.getTitle());
+		pDose =(EditText)findViewById(R.id.pill_edit_dose);
+		pDose.setText(""+pillAlarm.getDosage());
 		
 		pDescr=(EditText)findViewById(R.id.epill_descr);
 		pDescr.setText(pillAlarm.getDescr());
@@ -209,6 +211,7 @@ public class EditOldPill extends SherlockActivity{
 		String name = pName.getText().toString();
 		String descrt=pDescr.getText().toString();
 		int totalPills=getTotalPills();
+		int dosage = Integer.parseInt(pDose.getText().toString());
 		PillDB pdb = new PillDB(this);
 		PillAlarm p;
 		long id=0;
@@ -216,12 +219,12 @@ public class EditOldPill extends SherlockActivity{
 			
 			
 			Log.e("imageuri", ""+location);
-			p = new PillAlarm(name,descrt,dayslist,location,totalPills);
+			p = new PillAlarm(name,descrt,dayslist,location,totalPills,dosage);
 			id = pdb.addAlarm(p,location);
 			finish();
 		}
 		else{
-			p = new PillAlarm(name,descrt,dayslist,totalPills);
+			p = new PillAlarm(name,descrt,dayslist,totalPills,dosage);
 			id = pdb.addAlarm(p);
 			finish();
 		}

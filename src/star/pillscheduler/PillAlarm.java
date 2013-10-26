@@ -8,20 +8,22 @@ public class PillAlarm {
 	private int pillsLeft;
 	private int alterDay;
 	private boolean isAlterDay;
-	private int ringtone;
+	private int ringtone,dosage;
 	private boolean allDays;
 	private String daysTime;
 	
 	
-	public PillAlarm(String t,String d,String timings,int totalPills){
+	public PillAlarm(String t,String d,String timings,int totalPills,int dose){
 		this.title=t;
 		this.descr=d;
 		this.pillsLeft=totalPills;
+		this.dosage=dose;
 		this.daysTime=timings;
 			}
-
-	public PillAlarm(String t, String d, String timings, String imguri,int totalPills) {
+	
+	public PillAlarm(String t, String d, String timings, String imguri,int totalPills,int dose) {
 		// TODO Auto-generated constructor stub
+		this.dosage=dose;
 		this.title=t;
 		this.descr=d;
 		this.pillsLeft=totalPills;
@@ -37,6 +39,11 @@ public class PillAlarm {
 		
 		return this.title;
 	}
+	
+	public int getDosage(){
+		return this.dosage;
+	}
+
 	public String getDescr(){
 		return this.descr;
 	}

@@ -6,6 +6,10 @@ import android.app.NotificationManager;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.InputType;
+import android.util.Log;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -18,18 +22,35 @@ public class AlarmDialog extends Activity {
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-	/*	
+		
 		final int pillIdfetched = getIntent().getIntExtra("id", 0);
+		
 		final int d = getIntent().getIntExtra("d", 0);
 		final int pillId = pillIdfetched-d;
+		
+		
 		super.onCreate(savedInstanceState);
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.ringdialog);
+		
+		Log.e("pill id received", ""+pillId);
+		Log.e("pill day", ""+d);
 		
 		if(android.os.Build.VERSION.SDK_INT>=11){
 		this.setFinishOnTouchOutside(false);
 		}
 		
-		final PillAlarm pa = PillDB.getPill(pillId);
+		
+		final PillAlarm pa;
+		PillDB pdb = new PillDB(this);
+		try{
+			
+		 pa = pdb.getPill(pillId);
+			
+			
+		
+		
+		
 		
 		pName  =(TextView)findViewById(R.id.alarm_pillnname);
 		pName.setText(pa.getTitle());
@@ -44,7 +65,7 @@ public class AlarmDialog extends Activity {
 			public void onClick(View v) {
 				int value = pa.getPills();
 				Log.e("Alarm Dialog pillId", ""+pillId);
-				PillDB.update(pillId,value+5);
+				PillDB.update(pillId,value-pa.getDosage());
 				NotificationManager m = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
 				m.cancel(pillIdfetched);
 				finish();
@@ -61,8 +82,15 @@ public class AlarmDialog extends Activity {
 				m.cancel(pillId);
 				finish();
 			}
-		});
-		*/
+		});}
+		
+		catch(Exception e){
+			Log.e("errro",""+e.getMessage());
+			Log.e("err", ""+pillId);
+			
+		}
+		
+		/*
 		
 		super.onCreate(savedInstanceState);
 		final int pillIdfetched = getIntent().getIntExtra("id", 0);
@@ -97,7 +125,7 @@ public class AlarmDialog extends Activity {
 	        });
 	    AlertDialog alert = builder.create();
 	    alert.show();
-		
+		*/
 	}
 	
 }

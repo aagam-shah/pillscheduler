@@ -4,11 +4,12 @@
     android:layout_height="fill_parent"
     android:orientation="vertical" >
 
-    <TextView
+    <ImageView
         android:id="@android:id/empty"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:text="No Pills added...Click on the Plus button above"
+        android:scaleType="fitXY"
+        android:src="@drawable/homepage"
         android:visibility="gone" />
 
     <ListView

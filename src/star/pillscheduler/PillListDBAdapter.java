@@ -1,6 +1,7 @@
 package star.pillscheduler;
 
 import java.io.File;
+import java.io.IOException;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -13,11 +14,14 @@ import android.graphics.Bitmap.Config;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PorterDuff.Mode;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
+import android.media.ExifInterface;
+import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -43,16 +47,16 @@ public class PillListDBAdapter extends SimpleCursorAdapter{
 	public String[] from;
 	public int[] to;
 	public LayoutInflater inflater;
-	public TextView tv;
+	//public TextView tv;
 	public PillListDBAdapter(Context context, int layout, Cursor c,
-			String[] from, int[] to, TextView tv1) {
+			String[] from, int[] to) {
 		super(context, layout, c, from, to);
 		this.ctx=context;
 		this.layoutid=layout;
 		this.curs=c;
 		this.from=from;
 		this.to=to;
-		this.tv = tv1;
+		//this.tv = tv1;
 		float scale = ctx.getResources().getDisplayMetrics().density;
 		inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		// TODO Auto-generated constructor stub
@@ -88,6 +92,8 @@ public class PillListDBAdapter extends SimpleCursorAdapter{
 		ImageView img = (ImageView)view.findViewById(R.id.pill_img);
 		Button edit = (Button)view.findViewById(R.id.list_edit_pill);
 		Button pillNo = (Button)view.findViewById(R.id.list_pills);
+		Button order = (Button)view.findViewById(R.id.list_order);
+		
 		final Button delete = (Button)view.findViewById(R.id.list_delete);
 		final RelativeLayout lay = (RelativeLayout)view.findViewById(R.id.wrapper_list);
 		RelativeLayout img_text = (RelativeLayout)view.findViewById(R.id.pill_l);
@@ -98,6 +104,18 @@ public class PillListDBAdapter extends SimpleCursorAdapter{
 		descr.setText(cursor.getString(cursor.getColumnIndex(PillDB.descrDB)));
 		name.setText(cursor.getString(cursor.getColumnIndex(PillDB.nameDB)));
 		pillNo.setText(curs.getString(cursor.getColumnIndex("pillsleft")));
+		
+		order.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+
+				Intent browserIntent = new Intent(Intent.ACTION_VIEW,
+						Uri.parse("http://www.healthkartplus.com"));
+				ctx.startActivity(browserIntent);
+					
+			}
+		});
 		if(Integer.parseInt(pillNo.getText().toString())<5)
 			//lay.setBackgroundColor(Color.rgb(197, 226, 109));green
 			lay.setBackgroundColor(Color.rgb(255, 148, 148));
@@ -168,7 +186,7 @@ public class PillListDBAdapter extends SimpleCursorAdapter{
 		});
 		
 	}
-		
+		public Bitmap rotatedBitmap ;
 	private void setImage(ImageView v, String value) {
 		int radius=60;
 		File imgFile = new  File(value);
@@ -199,8 +217,41 @@ public class PillListDBAdapter extends SimpleCursorAdapter{
 		            sbmp.getWidth() / 2+0.1f, paint);
 		    paint.setXfermode(new PorterDuffXfermode(Mode.SRC_IN));
 		    canvas.drawBitmap(sbmp, rect, rect, paint);
-		    v.setImageBitmap(output);
+		    canvas.rotate(90);
+		    
+		    Matrix matrix = new Matrix();
 
+		  
+
+		    ExifInterface exif;
+			try {
+				exif = new ExifInterface(value);
+				int orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
+				if(orientation==6)
+					  matrix.postRotate(90);
+				else
+					  matrix.postRotate(0);
+			
+			
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				matrix.postRotate(0);
+				Log.e("erorrr", "exif");
+			}
+			
+			
+		    
+		    Bitmap scaledBitmap = Bitmap.createScaledBitmap(output,output.getHeight(),output.getWidth(), true);
+
+		     rotatedBitmap = Bitmap.createBitmap(scaledBitmap , 0, 0, scaledBitmap .getWidth(), scaledBitmap .getHeight(), matrix, true);
+		    
+		    v.setImageBitmap(rotatedBitmap);
+		    output.recycle();
+		    bmp.recycle();
+		    sbmp.recycle();
+		    scaledBitmap.recycle();
+		   // rotatedBitmap.recycle();
+		    
 		}
 		else{
 		//	Log.e("ad", "doesnt exist"+value);

@@ -48,7 +48,7 @@ public class addPill extends SherlockActivity {
 	public Button others,timings;
 	public ImageView pillImg;
 	public int numberPills=0;
-	public EditText pName,pDescr,pNo;
+	public EditText pName,pDescr,pNo,pDose;
 	public String dayslist="000000000000000000000000000";
 	public boolean isIMG=false;
 	public int dialogvalue=0;
@@ -68,6 +68,7 @@ public class addPill extends SherlockActivity {
 		pillImg=(ImageView)findViewById(R.id.pillImg);
 		others =(Button)findViewById(R.id.others);
 		pName=(EditText)findViewById(R.id.pill_name);
+		pDose = (EditText)findViewById(R.id.pill_dose);
 		pDescr=(EditText)findViewById(R.id.pill_descr);
 		timings=(Button)findViewById(R.id.addtime);
 		for(int i=0;i<4;i++){
@@ -77,6 +78,7 @@ public class addPill extends SherlockActivity {
 		setListeners();
 		//asda
 		pNo = (EditText)findViewById(R.id.pill_name);
+		
 	}
 	private void setListeners() {
 		// TODO Auto-generated method stub\
@@ -138,6 +140,7 @@ public class addPill extends SherlockActivity {
 		switch(item.getItemId()){
 		
 		case android.R.id.home:
+			
 			showDialog(455);
 	        return true;
 	        
@@ -145,9 +148,17 @@ public class addPill extends SherlockActivity {
     		boolean isEmpty = checkNotEmpty();
     		Log.e("hello", "save");
     		savePill();
-    		finish();
+    		if(isIMG){
+    		p.recycle();
+    		rotatedBitmap.recycle();
+    		bitmap.recycle();
+    		}finish();
     		return true;
     	case R.id.discard:
+    		if(isIMG){
+    		p.recycle();
+    		rotatedBitmap.recycle();
+    		bitmap.recycle();}
     		finish();
     		return false;
     	default:
@@ -172,6 +183,10 @@ public class addPill extends SherlockActivity {
 		case 2:
 			return createPillDialog();
 		case 455:
+			if(isIMG){
+			p.recycle();
+    		rotatedBitmap.recycle();
+    		bitmap.recycle();}
 			return createConfirmDialog();
 		default:
 			return null;
@@ -247,13 +262,14 @@ public class addPill extends SherlockActivity {
 	    }
 		
 	public Uri picUri;
+	public Bitmap bitmap,p,rotatedBitmap;
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		// TODO Auto-generated method stub
+		// TODO Auto-generated method stu
 		//Log.e("camera", "");
 		
 		if(requestCode==39 && resultCode==Activity.RESULT_OK){
-			Toast.makeText(this, "Added", Toast.LENGTH_SHORT).show();
+		//	Toast.makeText(this, "Added", Toast.LENGTH_SHORT).show();
 			dayslist = data.getStringExtra("lists");
 			
 			
@@ -269,28 +285,35 @@ public class addPill extends SherlockActivity {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-	        Bitmap bitmap = BitmapFactory.decodeStream(stream);
-	        Bitmap p = bitmap;
-	        Bitmap rotatedBitmap = null;
-	       try {
-			ExifInterface exif = new ExifInterface(location);
+	         bitmap = BitmapFactory.decodeStream(stream);
+	         p = bitmap;
+	        
+	         rotatedBitmap = p;
+	     /*  try {
+			
+	    	   
+	    	ExifInterface exif = new ExifInterface(location);
 			int orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
 			   
+			Toast.makeText(getApplicationContext(), "Orien :  "+orientation, Toast.LENGTH_SHORT).show();
 			Matrix matrix = new Matrix();
-
+			if(orientation==6)
 			matrix.postRotate(90);
+			else
+				matrix.postRotate(0);
 			rotatedBitmap = Bitmap.createBitmap(p , 0, 0, p .getWidth(), 
 					p .getHeight(), matrix, true);
+			
 			pillImg.setImageBitmap(rotatedBitmap);
 			Log.e("orient",""+orientation);
 		} catch (Exception e) {
 			Log.e("error","exif");
 			Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show();
 		}
-			
-			//pillImg.setImageBitmap(rotatedBitmap);
+			*/
+			pillImg.setImageBitmap(bitmap);
 			isIMG=true;
-			Toast.makeText(this, "Added", Toast.LENGTH_SHORT).show();
+			//Toast.makeText(this, "Added", Toast.LENGTH_SHORT).show();
 			//Log.e("camera", ""+s);
 			
 		}
@@ -307,6 +330,8 @@ public class addPill extends SherlockActivity {
 		
 		String name = pName.getText().toString();
 		String descrt=pDescr.getText().toString();
+		int dosage = Integer.parseInt(pDose.getText().toString());
+		
 		int totalPills=getTotalPills();
 		PillDB pdb = new PillDB(this);
 		PillAlarm p;
@@ -317,21 +342,24 @@ public class addPill extends SherlockActivity {
 			
 			
 			Log.e("imageuri", ""+location);
-			p = new PillAlarm(name,descrt,dayslist,location,totalPills);
+			p = new PillAlarm(name,descrt,dayslist,location,totalPills,dosage);
 			id = pdb.addAlarm(p,location);
+			
+			
 		}
 		else{
-			p = new PillAlarm(name,descrt,dayslist,totalPills);
+			p = new PillAlarm(name,descrt,dayslist,totalPills,dosage);
 			id = pdb.addAlarm(p);
 		}}
 		
 		catch(Exception e){
 			Log.e("error",e.getMessage());
+		
 		}
 		
-		
+		Log.e("id addded ", ""+id);
 	}
-	private int getTotalPills() {
+	private int getTotalPills() {			//43
 		// TODO Auto-generated method stub
 		int value=0;
 		for(int i=0;i<4;i++){

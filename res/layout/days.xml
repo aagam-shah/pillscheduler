@@ -27,7 +27,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="3.2"
-                android:src="@drawable/orange" />
+                android:src="@drawable/m" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -83,7 +83,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="3.2"
-                android:src="@drawable/orange" />
+                android:src="@drawable/t" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -139,7 +139,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="3.2"
-                android:src="@drawable/orange" />
+                android:src="@drawable/w" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -203,7 +203,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="3.2"
-                android:src="@drawable/orange" />
+                android:src="@drawable/t" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -259,7 +259,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="3.2"
-                android:src="@drawable/orange" />
+                android:src="@drawable/f" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -315,7 +315,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="3.2"
-                android:src="@drawable/orange" />
+                android:src="@drawable/s" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -436,7 +436,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="3.2"
-                android:src="@drawable/orange" />
+                android:src="@drawable/s" />
 
             <LinearLayout
                 android:layout_width="match_parent"

@@ -1,143 +1,169 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@android:color/white"
-    android:orientation="vertical"
-    android:weightSum="3" >
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="40dp"
-        android:layout_weight="1"
-        android:weightSum="2" >
-
-        <ImageView
-            android:id="@+id/pillImg"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@drawable/editpillimg"
-            android:src="@drawable/orange" />
+            android:background="@android:color/white"
+            android:orientation="vertical"
+            android:weightSum="3" >
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" >
-
-            <TextView
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingBottom="6dp"
-                android:paddingLeft="10dp"
-                android:text="Pill Name"
-                android:textSize="20sp" />
-
-            <EditText
-                android:id="@+id/pill_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginTop="40dp"
                 android:layout_weight="1"
-                android:hint="Enter Pill Name"
-                android:nextFocusDown="@+id/pill_descr"
-                android:singleLine="true" />
-        </LinearLayout>
-    </LinearLayout>
+                android:weightSum="2" >
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="40dp"
-        android:layout_weight="1"
-        android:orientation="vertical"
-        android:weightSum="2" >
+                <ImageView
+                    android:id="@+id/pillImg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/editpillimg"
+                    android:src="@drawable/orange" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Pill Description"
-            android:textSize="20sp" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical" >
 
-        <EditText
-            android:id="@+id/pill_descr"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:hint="Enter Desct"
-            android:nextFocusDown="@+id/cb1"
-            android:nextFocusUp="@+id/pill_name"
-            android:singleLine="true" />
-    </LinearLayout>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="4dp"
+                        android:paddingLeft="10dp"
+                        android:text="Pill Name"
+                        android:textSize="20sp" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="0dp"
-        android:layout_weight="1"
-        android:orientation="vertical"
-        android:weightSum="2" >
+                    <EditText
+                        android:id="@+id/pill_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:hint="Enter Pill Name"
+                        android:nextFocusDown="@+id/pill_descr"
+                        android:singleLine="true" />
+                </LinearLayout>
+            </LinearLayout>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="-10dp"
-            android:text="Stock"
-            android:textSize="20sp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="40dp"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:weightSum="2" >
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal"
-            android:weightSum="5" >
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Pill Description"
+                    android:textSize="20sp" />
 
-            <CheckBox
-                android:id="@+id/cb1"
+                <EditText
+                    android:id="@+id/pill_descr"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="Enter Desct"
+                    android:nextFocusDown="@+id/cb1"
+                    android:nextFocusUp="@+id/pill_name"
+                    android:singleLine="true" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="5dp"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:weightSum="2" >
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="-10dp"
+                    android:text="Stock"
+                    android:textSize="20sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal"
+                    android:weightSum="5" >
+
+                    <CheckBox
+                        android:id="@+id/cb1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="5" />
+
+                    <CheckBox
+                        android:id="@+id/cb2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="-10dp"
+                        android:layout_weight="1"
+                        android:text="10" />
+
+                    <CheckBox
+                        android:id="@+id/cb3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="-10dp"
+                        android:layout_weight="1"
+                        android:text="20" />
+
+                    <CheckBox
+                        android:id="@+id/cb4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="-10dp"
+                        android:layout_weight="1"
+                        android:text="30" />
+
+                    <Button
+                        android:id="@+id/others"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="-10dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/curvedbutton"
+                        android:text="other" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="5" />
+                android:layout_marginTop="0dp"
+                android:orientation="horizontal" >
 
-            <CheckBox
-                android:id="@+id/cb2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="-10dp"
-                android:layout_weight="1"
-                android:text="10" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Dosage"
+                     android:textSize="20sp" />
 
-            <CheckBox
-                android:id="@+id/cb3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="-10dp"
-                android:layout_weight="1"
-                android:text="20" />
-
-            <CheckBox
-                android:id="@+id/cb4"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="-10dp"
-                android:layout_weight="1"
-                android:text="30" />
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:id="@+id/pill_dose"
+                    android:text="1"
+                    android:hint="Enter Dosage"
+                    android:inputType="number"
+                    android:digits="1234567890"
+                    android:maxLength="2" />
+            </LinearLayout>
 
             <Button
-                android:id="@+id/others"
+                android:id="@+id/addtime"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="-10dp"
-                android:layout_weight="1"
-                android:text="other" />
+                android:layout_marginTop="5dp"
+                android:background="@drawable/curvedbutton"
+                android:text="Add timings"
+                android:tint="#44FF0000" />
         </LinearLayout>
-    </LinearLayout>
-
-    <Button
-        android:id="@+id/addtime"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Add timings"
-        android:tint="#44FF0000" />
-
-</LinearLayout>

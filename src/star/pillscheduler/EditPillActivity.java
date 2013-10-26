@@ -36,7 +36,7 @@ public class EditPillActivity extends SherlockActivity{
 	public Button others,timings;
 	public ImageView pillImg;
 	public int numberPills=0;
-	public EditText pName,pDescr,pNo;
+	public EditText pName,pDescr,pNo,pDose;
 	public String dayslist="000000000000000000000000000";
 	public boolean isIMG=false;
 	public int dialogvalue=0;
@@ -252,11 +252,11 @@ public class EditPillActivity extends SherlockActivity{
 			
 			
 			Log.e("imageuri", ""+location);
-			p = new PillAlarm(name,descrt,dayslist,location,totalPills);
+			p = new PillAlarm(name,descrt,dayslist,location,totalPills,1);
 			id = pdb.addAlarm(p,location);
 		}
 		else{
-			p = new PillAlarm(name,descrt,dayslist,totalPills);
+			p = new PillAlarm(name,descrt,dayslist,totalPills,1);
 			id = pdb.addAlarm(p);
 		}
 		}
